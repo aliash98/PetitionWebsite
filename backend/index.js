@@ -161,28 +161,27 @@ app.post('/petition/new', authenticateToken, (req, res) => {
 
 const signPetition = async (petitionId, signer) => {
   // TODO: its better for safety that you use a differetn objectID rather than using the same one existing in parseserver.
-  // const query = new Parse.Query("User");
-  // query.equalTo("username", signer);
-  // const user = await query.find();
-  // userId = user[0].id;
-  // console.log(userId);
-  console.log(signer);
+  var flag = 0;
   const Petition = Parse.Object.extend("Petition");
-  const query2 = new Parse.Query(Petition);
-  query2.get(petitionId)
+  const query = new Parse.Query(Petition);
+  await query.get(petitionId)
     .then((petition) => {
       const signedArray = petition.get("signedUsersArray");
       for (const value of signedArray) {
-        if (value === signer){
-          return Promise.reject({ code: 125, message: "User has already signed this petition!" }); // 125 is the code number?
-        }
+        if (value === signer)
+          flag = 1;
       }
-      petition.addUnique("signedUsersArray", signer);
-      petition.increment("signatureNum");
-      return petition.save();
+      if (!flag) {
+        petition.addUnique("signedUsersArray", signer);
+        petition.increment("signatureNum");
+        return petition.save();
+      }
     }, (error) => {
       console.log("Error occured when retrieving petition: " + error);
     });
+  console.log(flag);
+  if (flag)
+    return Promise.reject({ code: 125, message: "User has already signed this petition!" }); // 125 is the code number?
   return 1;
 }
 
@@ -197,6 +196,41 @@ app.post('/petition/sign', authenticateToken, (req, res) => {
   })
 })
 
+
+// RETRIEVING PETITIONS
+
+const getPetitions = async () => {
+  console.log("Hello there!");
+  const Petition = Parse.Object.extend("Petition");
+  const query = new Parse.Query(Petition);
+  const results = await query.find();
+  console.log("Successfully retrieved " + results.length + " petitions.");
+  let petitions = [];
+  for (let i = 0; i < results.length; i++) {
+    const object = results[i];
+    this_post = {
+      id: object.get('objectId'),
+      title: object.get('title'),
+      content: object.get('content'),
+      createdBy: object.get('createdBy'),
+      createdAt: object.get('createdAt'),
+      signatureNum: object.get('signatureNum'),
+    }
+    petitions.push(this_post);
+  }
+  return petitions;
+}
+
+
+app.get('/petition/retrieve', authenticateToken, (req, res) => {
+  getPetitions().then(value => {
+    res.json({
+      "post": value
+    });
+  }, reason => {
+    res.send("something went wrong " + reason);
+  });
+})
 
 
 
