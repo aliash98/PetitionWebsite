@@ -1,0 +1,110 @@
+* {
+    font-family: Vazir;
+    direction: rtl;
+}
+
+:root {
+    --platinum: #efefefff;
+    --white: #ffffffff;
+    --silver: #c6c6c6ff;
+    --cerulean-blue: #0857d1ff;
+    --rich-black: #0d0d0dff;
+    background-color: var(--platinum);
+}
+
+body {
+    background-color: var(--platinum);
+}
+
+/************* Main Container *************/
+
+#main-container {
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: var(--platinum);
+}
+
+/* Login Box */
+
+.login-container {
+    max-width: 1000px;
+    margin: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#login-box {
+    position: relative;
+    top: 25vh;
+}
+
+.login-box {
+    height: 400px;
+    background-color: var(--platinum);
+    border: 2px solid var(--cerulean-blue);
+    min-width: 350px;
+    max-width: 400px;
+}
+
+.tab-header {
+    height: 15%;
+}
+
+.btn-primary {
+    background-color: var(--silver) !important;
+    border: none !important;
+    color: var(--rich-black) !important;
+    opacity: 0.5 !important;
+}
+
+.btn-outline-primary {
+    background-color: var(--platinum) !important;
+    border: none !important;
+    color: var(--rich-black) !important;
+    opacity: 1 !important;
+}
+
+.form-tab {
+    height: 70%;
+}
+
+.logreg-input {
+    padding: 1.5rem !important;
+    font-weight: lighter !important;
+}
+
+.login-form-item {
+    width: 300px !important;
+    border: 1px solid var(--silver) !important;
+    border-radius: 1px !important;
+}
+
+.submit-btn {
+    background-color: var(--cerulean-blue) !important;
+    border: none !important;
+    color: var(--platinum) !important;
+    height: 50px;
+    border-radius: 50px !important;
+    width: 200px !important;
+}
+
+.tab-footer {
+    height: 15%;
+}
+
+#login-image {
+    background-image: url("../images/petition-logo.png");
+    background-size: center;
+    background-position: center;
+    position: relative;
+}
+
+.logo-container img {
+    width: 50%;
+}
+
+.logo-txt-container {
+    width: 100%;
+    text-align: center;
+}

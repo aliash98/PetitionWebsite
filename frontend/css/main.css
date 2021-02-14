@@ -1,0 +1,125 @@
+* {
+    font-family: Vazir;
+    direction: rtl;
+}
+
+:root {
+    --platinum: #efefefff;
+    --white: #ffffffff;
+    --silver: #c6c6c6ff;
+    --cerulean-blue: #0857d1ff;
+    --rich-black: #0d0d0dff;
+    background-color: var(--platinum);
+}
+
+body {
+    background-color: var(--platinum);
+}
+
+/***************** Top Nav *****************/
+
+#top-nav {
+    background: var(--white);
+    height: 75px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid var(--silver);
+    z-index: 1;
+}
+
+/* Logo */
+
+.logo-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    right: 3vw;
+    bottom: 0.1667vh;
+    background-color: var(--cerulean-blue);
+    border-radius: 5px;
+}
+
+.logo-text {
+    color: var(--white);
+    font-size: 40px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+/* Sub Menu */
+
+#sub-menu {
+    width: calc(100% - 50px - 7.5vw);
+    height: 100%;
+}
+
+.profile-txt {
+    color: var(--cerulean-blue);
+    position: absolute;
+    left: 3vw;
+}
+
+#toggle-menu-btn {
+    cursor: pointer;
+    display: none;
+    color: var(--rich-black);
+}
+
+.tabs-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    height: 75px;
+    width: 150px;
+}
+
+a {
+    font-weight: lighter !important;
+    position: relative;
+    top: 7.5px;
+    height: 59.5px !important;
+    color: var(--rich-black) !important;
+}
+
+a.active.nav-link {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 3px solid var(--rich-black) !important;
+}
+
+a.nav-link:hover {
+    border: none !important;
+}
+
+a.active.nav-link:hover {
+    border: none !important;
+    border-bottom: 3px solid var(--rich-black) !important;
+}
+
+/***************** Bottom Nav *****************/
+
+#bottom-nav {
+    background-color: var(--light-blue);
+    height: 75px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: 0 -2px 15px 0 #929292;
+    /* display: none; */
+}
+
+/************* Main Container *************/
+
+#main-container {
+    width: 100%;
+    margin: 75px 0 0 0;
+    overflow: hidden;
+}

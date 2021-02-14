@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"">
+    <meta http-equiv=" X-UA-Compatible" content="ie=edge">
+    <title>ورود</title>
+
+    <!-- Favicon -->
+    <!-- <link rel="icon" type="image/png" href="images/favicon-multi.png" /> -->
+
+    <!-- Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v27.2.1/dist/font-face.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/login.css">
+
+    <!--  -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+    <div id="main-container">
+        <div id="login-box" class="d-flex login-container">
+            <div class="col login-box">
+                <div class="row tab-header">
+                    <div class="col-6 p-0">
+                        <button id="register-tab-btn"
+                            class="text-center h-100 w-100 m-0 btn btn-outline-primary border-0 rounded-0"
+                            disabled><b>ثبت
+                                نام</b></button>
+                    </div>
+                    <div class="col-6 p-0">
+                        <button id="login-tab-btn"
+                            class="text-center h-100 w-100 m-0 btn btn-primary border-0 rounded-0"><b>ورود</b></button>
+                    </div>
+                </div>
+                <div id="register-tab" class="row form-tab" style="height: 85%;">
+                    <div class="m-auto">
+                        <input id="register-email-input" type="email"
+                            class="form-control my-2 logreg-input login-form-item" placeholder="ایمیل">
+                        <input id="register-password-input" type="password"
+                            class="form-control my-2 logreg-input login-form-item" placeholder="رمز عبور">
+                        <input id="register-repeat-password-input" type="password"
+                            class="form-control my-2 logreg-input login-form-item" placeholder="تکرار رمز عبور">
+                        <div class="form-check my-2">
+                            <div class="float-right">
+                                <input id="register-accept-rules" class="form-check-input float-right" type="checkbox"
+                                    value="" id="acceptRules">
+                            </div>
+                            <label class="form-check-label mr-4 float-right accept-rules-label" for="acceptRules">
+                                <small>
+                                    قوانین و شرایط را می‌پذیرم.
+                                </small>
+                            </label>
+                        </div>
+                        <div class="d-flex my-2 p-2 login-form-item justify-content-center"
+                            style="border: none !important;">
+                            <button onclick="register()" type="button"
+                                class="btn submit-btn my-2 p-2 login-form-item">ثبت
+                                ‌نام</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="login-tab" class="row form-tab" style="display: none; height: 85%;">
+                    <div class="m-auto">
+                        <input id="login-email-input" type="email"
+                            class="form-control my-2 logreg-input login-form-item" placeholder="ایمیل">
+                        <input id="login-password-input" type="password"
+                            class="form-control my-2 logreg-input login-form-item" placeholder="رمز عبور">
+                        <div class="d-flex my-2 p-2 login-form-item justify-content-center"
+                            style="border: none !important;">
+                            <button onclick="login()" type="button" class="btn submit-btn my-2 p-2">ورود</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-center"
+                    style="width: 100%; position: relative; bottom: 25px;">
+                    <div id="alert-zone" class="row tab-footer px-2">
+                    </div>
+                </div>
+            </div>
+            <div style="width: 100px;">
+
+            </div>
+            <div class="col p-0 d-flex"
+                style="flex-direction: column; justify-content: space-between; height: 325px;">
+                <div class="p-relative text-center logo-container">
+                    <img src="./images/petition-logo.png" class="mx-auto" alt="...">
+                </div>
+                <div class="logo-txt-container">
+                    <span style="font-size: xx-large; font-weight: bold;">
+                        دادخواست
+                    </span>
+                </div>
+                <div class="logo-txt-container">
+                    <span style="font-weight: lighter;">
+                        بستر جمع‌آوری امضاهای دانشجویی
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login-register-tab-toggle.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/persian-digit.js"></script>
+</body>
+
+</html>
