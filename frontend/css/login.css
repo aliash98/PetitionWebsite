@@ -83,7 +83,7 @@ body {
 .submit-btn {
     background-color: var(--cerulean-blue) !important;
     border: none !important;
-    color: var(--platinum) !important;
+    color: var(--white) !important;
     height: 50px;
     border-radius: 50px !important;
     width: 200px !important;
@@ -91,13 +91,6 @@ body {
 
 .tab-footer {
     height: 15%;
-}
-
-#login-image {
-    background-image: url("../images/petition-logo.png");
-    background-size: center;
-    background-position: center;
-    position: relative;
 }
 
 .logo-container img {

@@ -8,11 +8,14 @@
     <title>دادخواست . بستر جمع‌آوری امضاهای دانشجویی</title>
 
     <!-- Favicon -->
-    <!-- <link rel="icon" type="image/png" href="images/favicon-multi.png" /> -->
+    <link rel="icon" type="image/png" href="images/petition-logo.png" />
 
     <!-- Font -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v27.2.1/dist/font-face.css" rel="stylesheet"
         type="text/css" />
+
+    <!-- FontAwesome   -->
+    <link rel="stylesheet" href="css/fontawesome.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css">
@@ -39,15 +42,43 @@
                 </a>
                 <a class="nav-link" id="nav-data-tab" data-toggle="tab" href="#nav-data" role="tab"
                     aria-controls="nav-data" aria-selected="false">
-                    داده‌ها
+                    دادخواست‌ها
+                </a>
+                <a class="nav-link" id="nav-data-tab" data-toggle="tab" href="#nav-data" role="tab"
+                    aria-controls="nav-data" aria-selected="false">
+                    آمار و ارقام
                 </a>
             </div>
             <span class="profile-txt">
                 محسن لرنی، خوش آمدید.
             </span>
         </div>
-        <i class=" fal fa-bars fa-2x toggle-menu-bars" id="toggle-menu-btn" data-status=""></i>
     </nav>
+
+    <div id="main-container">
+        <form id="search-nav" class="form-inline my-2 my-lg-0" style="width: 100%;">
+            <input class="form-control mr-sm-2 search-input" type="search"
+                placeholder="دادخواست مورد نظر را جستجو کنید..." aria-label="Search">
+            <button class="btn my-2 my-sm-0 search-btn" type="submit">
+                جستجو
+            </button>
+        </form>
+        <div id="info-div" class="d-flex align-items-center">
+            <span class="d-flex align-items-center" style="flex-direction: row; justify-content: center;">
+                <img src="./images/petition-logo.png" class="mx-auto info-logo" alt="...">
+                <span class="info-txt">
+                    ادخواست
+                </span>
+            </span>
+            <span class="info-txt" style="color: var(--cerulean-blue); font-size: 35px;">
+                بستر جمع‌آوری امضاهای دانشجویی
+            </span>
+        </div>
+    </div>
+
+    <button type="button" class="d-flex btn create-petition-btn my-2 p-2 justify-content-center align-items-center">
+        <i class="gg-math-plus"></i>
+    </button>
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/persian-digit.js"></script>
