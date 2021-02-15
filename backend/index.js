@@ -113,9 +113,10 @@ app.post('/signin', (req, res) => {
 
 // -------- Petition Management ---------
 
+
 // NEW PETITION
 
-const newPetition = async (title, content, author) => {
+const newPetition = async (title, content, author, category, dueDate) => {
   // TODO: convert these three lines (retrieving user) to a async function.
   const query = new Parse.Query("User");
   query.equalTo("username", author);
@@ -127,6 +128,12 @@ const newPetition = async (title, content, author) => {
   petition.set('createdBy', user[0]);
   petition.set('signedUsersArray', [author]);
   petition.set('signatureNum', 1);
+  if (dueDate !== undefined)
+    petition.set('dueDate', dueDate);
+  if (category !== undefined)
+    petition.set('category', category);
+  const now = new Date();
+  petition.set('signatureDates', [ now ]);
   try {
     await petition.save();
     console.log("New petition crearted by " + author + " the id is " + petition.id);
@@ -138,9 +145,12 @@ const newPetition = async (title, content, author) => {
 
 app.post('/petition/new', authenticateToken, (req, res) => {
   // TODO: validation of titile and content
+  // TODO: validation of category and due date
   let user = req.user;
   let title = req.body.title;
   let content = req.body.content;
+  let category = req.body.category;
+  let dueDate = req.body.dueDate;
   if (title === undefined || content == undefined) {
     res.status(400).send({ "message": "Request Length should be 2" });
     return;
@@ -149,13 +159,14 @@ app.post('/petition/new', authenticateToken, (req, res) => {
     res.status(400).send({ "message": "filed `title` is not valid" });
     return;
   }
-  newPetition(title, content, user).then(value => {
+  newPetition(title, content, user, category, dueDate).then(value => {
     //console.log(value);
     res.status(201).send({ "objectId": value });
   }, reason => {
     res.status(400).send({ "message": reason.message });
   })
 })
+
 
 // SIGN A PETITION
 
@@ -200,7 +211,7 @@ app.post('/petition/sign', authenticateToken, (req, res) => {
 // RETRIEVING PETITIONS
 
 const getPetitions = async () => {
-  console.log("Hello there!");
+  //console.log("Hello there!");
   const Petition = Parse.Object.extend("Petition");
   const query = new Parse.Query(Petition);
   const results = await query.find();
@@ -215,12 +226,14 @@ const getPetitions = async () => {
       createdBy: object.get('createdBy'),
       createdAt: object.get('createdAt'),
       signatureNum: object.get('signatureNum'),
+      dueDate: object.get('dueDate'),
+      category: object.get('category')
+      // no need to send the signatureDates
     }
     petitions.push(this_post);
   }
   return petitions;
 }
-
 
 app.get('/petition/retrieve', authenticateToken, (req, res) => {
   getPetitions().then(value => {
@@ -232,6 +245,55 @@ app.get('/petition/retrieve', authenticateToken, (req, res) => {
   });
 })
 
+
+// RETRIEVING ONE PETITION
+
+
+// RETRIEVING USERS PETITIONS
+
+const getUserPetitions = async (user) => {
+  //console.log("Hello there!");
+  const user_query = new Parse.Query("User");
+  user_query.equalTo("username", user);
+  const userObject = await user_query.find();
+  const Petition = Parse.Object.extend("Petition");
+  const query = new Parse.Query(Petition);
+  //console.log(userObject);
+  query.equalTo("createdBy", { "__type": "Pointer", "className": "_User", "objectId": userObject[0].id });
+  const results = await query.find();
+  console.log("Successfully retrieved " + results.length + " petitions.");
+  let petitions = [];
+  for (let i = 0; i < results.length; i++) {
+    const object = results[i];
+    this_post = {
+      id: object.get('objectId'),
+      title: object.get('title'),
+      content: object.get('content'),
+      createdBy: object.get('createdBy'),
+      createdAt: object.get('createdAt'),
+      signatureNum: object.get('signatureNum'),
+      dueDate: object.get('dueDate'),
+      category: object.get('category')
+      // no need to send the signatureDates
+    }
+    petitions.push(this_post);
+  }
+  return petitions;
+}
+
+
+app.get('/petition/userpetitions', authenticateToken, (req, res) => {
+  let user = req.user;
+  getUserPetitions(user).then(value => {
+    res.json({
+      "post": value
+    });
+  }, reason => {
+    res.send("something went wrong " + reason);
+  });
+})
+
+// GETTING SIGNATURE DATES
 
 
 
