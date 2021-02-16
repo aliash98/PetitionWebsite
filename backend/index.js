@@ -248,6 +248,40 @@ app.get('/petition/retrieve', authenticateToken, (req, res) => {
 
 // RETRIEVING ONE PETITION
 
+const getSinglePetition = async (petitionId) => {
+  const Petition = Parse.Object.extend("Petition");
+  const query = new Parse.Query(Petition);
+  console.log(petitionId);
+  var this_petition;
+  await query.get(petitionId)
+    .then((object) => {
+      this_petition = {
+        id: object.get('objectId'),
+        title: object.get('title'),
+        content: object.get('content'),
+        createdBy: object.get('createdBy'),
+        createdAt: object.get('createdAt'),
+        signatureNum: object.get('signatureNum'),
+        dueDate: object.get('dueDate'),
+        category: object.get('category')
+        // no need to send the signatureDates
+      }  
+    }, (error) => {
+      console.log("Error occured when retrieving petition: " + error);
+    });
+  return this_petition;
+}
+
+app.get('/petition/retrieve/single', authenticateToken, (req, res) => {
+  getSinglePetition(req.body.petitionId).then(value => {
+    res.json({
+      "petition": value
+    });
+  }, reason => {
+    res.send("something went wrong " + reason);
+  });
+})
+
 
 // RETRIEVING USERS PETITIONS
 
@@ -281,7 +315,6 @@ const getUserPetitions = async (user) => {
   return petitions;
 }
 
-
 app.get('/petition/userpetitions', authenticateToken, (req, res) => {
   let user = req.user;
   getUserPetitions(user).then(value => {
@@ -293,7 +326,84 @@ app.get('/petition/userpetitions', authenticateToken, (req, res) => {
   });
 })
 
+
+// SEARCHING USING CATEGORY
+
+const getCategoryPetitions = async (category) => {
+  const Petition = Parse.Object.extend("Petition");
+  const query = new Parse.Query(Petition);
+  query.equalTo("category", category);
+  const results = await query.find();
+  console.log("Successfully retrieved " + results.length + " petitions.");
+  let petitions = [];
+  for (let i = 0; i < results.length; i++) {
+    const object = results[i];
+    this_post = {
+      id: object.get('objectId'),
+      title: object.get('title'),
+      content: object.get('content'),
+      createdBy: object.get('createdBy'),
+      createdAt: object.get('createdAt'),
+      signatureNum: object.get('signatureNum'),
+      dueDate: object.get('dueDate'),
+      category: object.get('category')
+      // no need to send the signatureDates
+    }
+    petitions.push(this_post);
+  }
+  return petitions;
+}
+
+app.get('/petition/search/category', authenticateToken, (req, res) => {
+  let category = req.body.category;
+  getCategoryPetitions(category).then(value => {
+    res.json({
+      "petition": value
+    });
+  }, reason => {
+    res.send("something went wrong " + reason);
+  });
+})
+
+
 // GETTING SIGNATURE DATES
+
+const getSignatureDates = async (petitionId) => {
+  const Petition = Parse.Object.extend("Petition");
+  const query = new Parse.Query(Petition);
+  //console.log(petitionId);
+  var dates = [];
+  await query.get(petitionId)
+    .then((object) => {
+      var signatureDates = object.get('signatureDates'); 
+      for (let i = 0; i < signatureDates.length; i++) {
+        const date = signatureDates[i];
+        dates.push(date);
+      }
+    }, (error) => {
+      console.log("Error occured when retrieving petition: " + error);
+    });
+  return dates;
+}
+
+app.get('/petition/dates', authenticateToken, (req, res) => {
+  getSignatureDates(req.body.petitionId).then(value => {
+    res.json({
+      "dates": value
+    });
+  }, reason => {
+    res.send("something went wrong " + reason);
+  });
+})
+
+
+
+// DELETE SIGNATURE
+
+
+// CHANGE SIGNATURE
+
+
 
 
 
