@@ -133,7 +133,7 @@ const newPetition = async (title, content, author, category, dueDate) => {
   if (category !== undefined)
     petition.set('category', category);
   const now = new Date();
-  petition.set('signatureDates', [ now ]);
+  petition.set('signatureDates', [now]);
   try {
     await petition.save();
     console.log("New petition crearted by " + author + " the id is " + petition.id);
@@ -265,7 +265,7 @@ const getSinglePetition = async (petitionId) => {
         dueDate: object.get('dueDate'),
         category: object.get('category')
         // no need to send the signatureDates
-      }  
+      }
     }, (error) => {
       console.log("Error occured when retrieving petition: " + error);
     });
@@ -371,11 +371,10 @@ app.get('/petition/search/category', authenticateToken, (req, res) => {
 const getSignatureDates = async (petitionId) => {
   const Petition = Parse.Object.extend("Petition");
   const query = new Parse.Query(Petition);
-  //console.log(petitionId);
   var dates = [];
   await query.get(petitionId)
     .then((object) => {
-      var signatureDates = object.get('signatureDates'); 
+      var signatureDates = object.get('signatureDates');
       for (let i = 0; i < signatureDates.length; i++) {
         const date = signatureDates[i];
         dates.push(date);
@@ -397,11 +396,47 @@ app.get('/petition/dates', authenticateToken, (req, res) => {
 })
 
 
+// DELETE PETITION
 
-// DELETE SIGNATURE
+const destroyPetition = async (object) => {
+  await object.destroy({});
+}
+
+const deletePetition = async (petitionId, user) => {
+  const user_query = new Parse.Query("User");
+  user_query.equalTo("username", user);
+  const userObject = await user_query.find();
+  const Petition = Parse.Object.extend("Petition");
+  const query = new Parse.Query(Petition);
+  await query.get(petitionId)
+    .then((object) => {
+      let createdBy = object.get('createdBy');
+      if (createdBy.id === userObject[0].id) {
+        destroyPetition(object).then(value => {
+          console.log("Petition " + petitionId + " destroyed!");
+          return "Done!"
+        }, reason => {
+          console.log("Destroy operation can't be done: " + reason);
+        })
+      }
+    }, (error) => {
+      console.log("Error occured when retrieving petition: " + error);
+    });
+  return Promise.reject("This user doesn't have the permission to delete this petition!");
+}
 
 
-// CHANGE SIGNATURE
+app.delete('/petition/delete', authenticateToken, (req, res) => {
+  console.log(req.body.petitionId);
+  deletePetition(req.body.petitionId, req.user).then(value => {
+    res.status(200).send({ 'OK': 'ok' });
+  }, reason => {
+    res.status(400).send({ "message": reason.message });
+  })
+})
+
+
+// EDIT PETITION
 
 
 
