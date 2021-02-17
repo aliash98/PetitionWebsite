@@ -96,14 +96,7 @@ function showPetitionCard(petition) {
     array_json = petition["petition"];
     console.log(array_json);
 
-    // if (!Array.isArray(array_json)) {
-    //     array_json = [];
-    //     array_json.push(posts["post"]);
-    // }
-
-    // $petition = $(".cloneable-selected-petitions").clone(true);
     $petition = $("#main-container");
-    // $petition.removeClass('d-none cloneable-selected-petitions');
 
     $petition.find("#petition-title").text(array_json.title);
     $petition.find("#petition-txt").text(array_json.content);

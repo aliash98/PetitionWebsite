@@ -188,6 +188,7 @@ function createSelectedPetitionElements(selectedPetitions) {
         $selectedPetitions.find("#selected-card-content").text(array_json[i].content);
         $selectedPetitions.find("#selected-card-id").text(array_json[i].id);
         $selectedPetitions.find("#selected-card-created-at").text(formatDate(array_json[i].createdAt));
+        $selectedPetitions.find("#selected-card-due-date").text(formatDate(array_json[i].dueDate));
 
         selectedPetitionElements.push($selectedPetitions)
     }
@@ -208,6 +209,7 @@ function createOpenPetitionElements(openPetitions) {
         $openPetitions.find("#open-card-content").text(array_json[i].content);
         $openPetitions.find("#open-card-id").text(array_json[i].id);
         $openPetitions.find("#open-card-created-at").text(formatDate(array_json[i].createdAt));
+        $openPetitions.find("#open-card-due-date").text(formatDate(array_json[i].dueDate));
 
         openPetitionElements.push($openPetitions)
     }
@@ -228,6 +230,7 @@ function createClosedPetitionElements(closedPetitions) {
         $closedPetitions.find("#closed-card-content").text(array_json[i].content);
         $closedPetitions.find("#closed-card-id").text(array_json[i].id);
         $closedPetitions.find("#closed-card-created-at").text(formatDate(array_json[i].createdAt));
+        $closedPetitions.find("#closed-card-due-date").text(formatDate(array_json[i].dueDate));
 
         closedPetitionElements.push($closedPetitions)
     }
