@@ -54,7 +54,7 @@ $(document).ready(function () {
 
 function createAndAppendPetitions(petitions) {
     $petitions = createPetitionElements(petitions);
-    $("#selected-petitions-cards").append($petition);
+    $("#selected-petitions-cards").append($petitions);
 }
 
 function createPetitionElements(petitions) {
@@ -83,7 +83,7 @@ function createPetitionElements(petitions) {
         // });
 
         // $post.find(".edit-post-container").attr("data-pid", array_json[i].id);
-        // postsElements.push($post)
+        postsElements.push($post)
     }
     return petitionElements;
 }
