@@ -150,13 +150,18 @@ app.post('/petition/new', authenticateToken, (req, res) => {
   let title = req.body.title;
   let content = req.body.content;
   let category = req.body.category;
-  let dueDate = req.body.dueDate;
+  let dueDate = {"__type":"Date","iso":req.body.dueDate};
+  console.log(dueDate);
+  if(category.length < 1){
+    res.status(400).send({"message":"Category must be declared"});
+    return;
+  }
   if (title === undefined || content == undefined) {
     res.status(400).send({ "message": "Request Length should be 2" });
     return;
   }
   if (title == '') {
-    res.status(400).send({ "message": "filed `title` is not valid" });
+    res.status(400).send({ "message": "fieled `title` is not valid" });
     return;
   }
   newPetition(title, content, user, category, dueDate).then(value => {
