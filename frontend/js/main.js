@@ -114,6 +114,7 @@ function createPetitionElements(petitions) {
 
         $petition.find("#selected-card-title").text(array_json[i].title);
         $petition.find("#selected-card-content").text(array_json[i].content);
+        $petition.find("#selected-card-id").text(array_json[i].id);
         // $post.find(".post-author").text(array_json[i].created_by.id);
         $petition.find("#selected-card-created-at").text(formatDate(array_json[i].createdAt));
 
@@ -141,30 +142,13 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
-const newPetition = () => {
-    fetch('http://localhost:1337/petition/new', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
-        },
-        body: JSON.stringify({
-            title: "My",  // TODO
-            content: "an", //TODO
-        }),
-    })
-        .then(
-            function (response) {
-                if (response.status !== 201) {
-                    console.log('Looks like there was a problem. Status Code: ' + response.status);
-                    return;
-                }
-                //window.location.reload();    
-            }
-        )
-        .catch(function (err) {
-            console.log('Fetch Error :-S', err);
-        });
+const onClickPetitionCard = () => {
+    $(".petition-card").on('click', function (e) {
+
+        $clickedCard = $(this).closest(".petition-card");
+        id = $clickedCard.find("#selected-card-id").text();
+    });
+    sessionStorage.setItem("cardId", id);
 }
 
 // new petition -> new post

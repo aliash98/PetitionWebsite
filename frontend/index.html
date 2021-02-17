@@ -38,20 +38,6 @@
             </span>
         </div>
         <div id="sub-menu" class="d-flex align-items-center">
-            <!-- <div class="nav nav-tabs tabs-div" id="nav-tab" role="tablist" style="border: 0px solid transparent;">
-                <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                    aria-controls="nav-home" aria-selected="true">
-                    خانه
-                </a>
-                <a class="nav-link" id="nav-data-tab" data-toggle="tab" href="#nav-data" role="tab"
-                    aria-controls="nav-data" aria-selected="false">
-                    دادخواست‌ها
-                </a>
-                <a class="nav-link" id="nav-data-tab" data-toggle="tab" href="#nav-data" role="tab"
-                    aria-controls="nav-data" aria-selected="false">
-                    آمار و ارقام
-                </a>
-            </div> -->
             <div class="tabs-div" style="border: 0px solid transparent;">
                 <span role="button" class="tabs-btn" style="border-bottom: 3px solid var(--rich-black);"
                     onclick="transitionToPage('index.html')">
@@ -108,11 +94,6 @@
                 data-target="#formModal">
                 ایجاد دادخواست
             </button>
-            <!-- <button type="button"
-                class="d-flex btn create-petition-btn-float my-2 p-2 justify-content-center align-items-center"
-                id="create-petition-btn" data-toggle="modal" data-target="#formModal">
-                <i class="gg-math-plus"></i>
-            </button> -->
         </div>
         <div id="selected-petitions" class="d-flex petitions">
             <div id="selected-petitions-title" class="d-flex align-items-center petitions-title">
@@ -125,7 +106,7 @@
                 </button>
             </div>
             <div id="selected-petitions-cards" class="d-flex petitions-container">
-                <div class="petition-card cloneable-selected-petitions d-none">
+                <div class="petition-card cloneable-selected-petitions" role="button" onclick="transitionToPage('sign.html')">
                     <span id="selected-card-title" class="card-title">
                     </span>
                     <span id="selected-card-content" class="card-txt">
@@ -139,6 +120,7 @@
                         <span id="selected-card-due-date" class="card-date-txt">
                         </span>
                     </div>
+                    <span id="selected-card-id" hidden></span>
                 </div>
             </div>
         </div>
