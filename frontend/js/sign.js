@@ -71,6 +71,8 @@ function showPetitionCard(petition) {
     $petition.find("#petition-creator").text(array_json[0].createdBy);
     $petition.find("#petition-category").text(array_json[0].category);
     $petition.find("#petition-start-date").text(formatDate(array_json[0].createdAt));
+    $petition.find("#petition-end-date").text(formatDate(array_json[0].dueDate));
+    $petition.find("#petition-signers").text(array_json[0].signatureNum);
 
     // $post.find(".remove-post-container").attr("data-pid", array_json[i].id).on('click', function (e) {
     //     deletePostRequest($(this).data("pid"), $(this).closest(".post-container"));
