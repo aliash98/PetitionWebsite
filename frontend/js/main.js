@@ -41,7 +41,7 @@ $(document).ready(function () {
             let json_obj = JSON.parse(txt);
             if (json_obj) {
                 createAndAppendPetitions(json_obj);
-            } 
+            }
             // else {
             //     $("#no-post-alert").removeClass("d-none");
             // }
@@ -53,7 +53,7 @@ $(document).ready(function () {
 })
 
 function createAndAppendPetitions(petitions) {
-    $petitions = createPostElements(petitions);
+    $petitions = createPetitionElements(petitions);
     $("#selected-petitions-cards").append($petition);
 }
 
