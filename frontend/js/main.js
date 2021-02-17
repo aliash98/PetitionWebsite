@@ -79,7 +79,7 @@ login = () => {
         return;
     }
 
-    // $('#dismiss-alert').click();
+    $('#dismiss-alert').click();
 
 
     fetch('http://localhost:1337/signin', {
@@ -166,6 +166,8 @@ register = () => {
             function (response) {
                 if (response.status !== 201) {
                     console.log('Looks like there was a problem. Status Code: ' + response.status);
+                    showLoginAlert('ایمیل یا شماره دانشجویی شما قبلا ثبت شده است!')
+                    $('#dismiss-alert').click();
                     return;
                 }
                 response.text().then(txt =>
@@ -182,11 +184,13 @@ register = () => {
 // registerDone = (response) => {
 //     $('#login-tab-btn').click()
 //     showLoginAlert(response.message, 'success')
+//     $('#dismiss-alert').click();
 // }
 
 registerDone = () => {
     $('#login-tab-btn').click()
-    showLoginAlert('ثبت نام با موفقیت انجام شد.', 'success')
+    showLoginAlert('ثبت نام با موفقیت انجام شد.', 'success');
+    $('#dismiss-alert').click();
 }
 
 const logout = () => {
