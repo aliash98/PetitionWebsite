@@ -158,7 +158,7 @@ register = () => {
         },
         body: JSON.stringify({
             "email": email,
-            "studentID": studentID,
+            "studentID": studentId,
             "password": password
         }),
     })
