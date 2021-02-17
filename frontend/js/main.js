@@ -106,8 +106,6 @@ login = () => {
                 }, 3600000);
                 showLoginAlert('ورود با موفقیت انجام شد.', 'success');
                 transitionToPage('index.html');
-                // showLoggedInButtons();
-                // closeModal();
             });
         })
         .catch(function (err) {
@@ -115,16 +113,13 @@ login = () => {
         });
 }
 
-const register = () => {
+register = () => {
     const emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    // let email = $('#register-email-input').val();
-    // let password = $('#register-password-input').val();
-    // let repeatPassword = $('#register-repeat-password-input').val();
-    // let acceptRules = $('#register-accept-rules').prop('checked');
-    let email = "alialaee98@gmail.com";
-    let password = "alialiali";
-    let repeatPassword = "alialiali";
-    let studentID = "96109606";
+    let email = $('#register-email-input').val();
+    let studentId = $('#register-studentId-input').val();
+    let password = $('#register-password-input').val();
+    let repeatPassword = $('#register-repeat-password-input').val();
+    let acceptRules = $('#register-accept-rules').prop('checked');
 
     if (email == '') {
         showLoginAlert('لطفا ایمیل خود را وارد کنید!')
@@ -133,6 +128,11 @@ const register = () => {
 
     if (!emailReg.test(email)) {
         showLoginAlert('لطفا یک ایمیل معتبر وارد کنید!')
+        return;
+    }
+
+    if (studentId == '') {
+        showLoginAlert('لطفا شماره دانشجویی خود را وارد کنید!')
         return;
     }
 
@@ -170,12 +170,18 @@ const register = () => {
                 }
                 response.text().then(txt =>
                     console.log(txt));
+                registerDone();
             }
         )
         .catch(function (err) {
             console.log('Fetch Error :-S', err);
         });
 
+}
+
+registerDone = (response) => {
+    $('#login-tab-btn').click()
+    showLoginAlert(response.message, 'success')
 }
 
 const logout = () => {
