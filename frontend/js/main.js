@@ -104,8 +104,8 @@ login = () => {
                     studentId: studentId,
                     //email: email
                 }, 3600000);
-                showLoginAlert('Login successful', 'success');
-                transitionToPage(index.html);
+                showLoginAlert('ورود با موفقیت انجام شد.', 'success');
+                transitionToPage('index.html');
                 // showLoggedInButtons();
                 // closeModal();
             });
