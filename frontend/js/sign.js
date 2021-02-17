@@ -23,10 +23,12 @@ $(document).ready(function () {
     $('#user-studentId-placeholder').html(user.studentId);
 
     var petitionID = sessionStorage.getItem('cardId');
+    console.log(petitionID);
 
     fetch('http://localhost:1337/petition/retrieve/single', {
-        method: 'GET',
+        method: 'POST',
         headers: {
+            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + user.token,
         },
         body: JSON.stringify({
@@ -38,6 +40,7 @@ $(document).ready(function () {
             return;
         }
         response.text().then(txt => {
+            console.log('in');
             let json_obj = JSON.parse(txt);
             if (json_obj) {
                 // createAndAppendPetitions(json_obj);
@@ -67,22 +70,13 @@ function showPetitionCard(petition) {
     $petition = $("#main-container");
     // $petition.removeClass('d-none cloneable-selected-petitions');
 
-    $petition.find("#petition-title").text(array_json[0].title);
-    $petition.find("#petition-txt").text(array_json[0].content);
-    $petition.find("#petition-creator").text(array_json[0].createdBy);
-    $petition.find("#petition-category").text(array_json[0].category);
-    $petition.find("#petition-start-date").text(formatDate(array_json[0].createdAt));
-    $petition.find("#petition-end-date").text(formatDate(array_json[0].dueDate));
-    $petition.find("#petition-signers").text(array_json[0].signatureNum);
-
-    // $post.find(".remove-post-container").attr("data-pid", array_json[i].id).on('click', function (e) {
-    //     deletePostRequest($(this).data("pid"), $(this).closest(".post-container"));
-    // });
-
-    // $post.find(".edit-post-container").attr("data-pid", array_json[i].id);
-    petitionElements.push($petition)
-
-    return petitionElements;
+    $petition.find("#petition-title").text(array_json.title);
+    $petition.find("#petition-txt").text(array_json.content);
+    $petition.find("#petition-creator").text(array_json.createdBy);
+    $petition.find("#petition-category").text(array_json.category);
+    $petition.find("#petition-start-date").text(formatDate(array_json.createdAt));
+    $petition.find("#petition-end-date").text(formatDate(array_json.dueDate));
+    $petition.find("#petition-signers").text(array_json.signatureNum);
 }
 
 function formatDate(date) {

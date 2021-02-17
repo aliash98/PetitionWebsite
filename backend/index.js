@@ -272,35 +272,12 @@ const getSinglePetition = async (petitionId) => {
     category: object.get('category')
     // no need to send the signatureDates
   }
-
-  // await query.get(petitionId)
-  //   .then((object) => {
-  //     var username;
-  //     const createdBy_query = new Parse.Query("User");
-  //     await createdBy_query.get(object.get('createdBy').id).then((userObject) => {
-  //       username = userObject.get('username');
-  //     }, (error) => {
-  //       console.log("Error retrieving createdBy user!" + error);
-  //     });
-  //     this_petition = {
-  //       id: object.id,
-  //       title: object.get('title'),
-  //       content: object.get('content'),
-  //       createdBy: object.get('createdBy'),
-  //       createdAt: username,
-  //       signatureNum: object.get('signatureNum'),
-  //       dueDate: object.get('dueDate'),
-  //       category: object.get('category')
-  //       // no need to send the signatureDates
-  //     }
-  //   }, (error) => {
-  //     console.log("Error occured when retrieving petition: " + error);
-  //   });
   return this_petition;
 }
 
-app.get('/petition/retrieve/single', authenticateToken, (req, res) => {
+app.post('/petition/retrieve/single', authenticateToken, (req, res) => {
   getSinglePetition(req.body.petitionId).then(value => {
+    console.log("Successfully retrieved a single petition")
     res.json({
       "petition": value
     });
