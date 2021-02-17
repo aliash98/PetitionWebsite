@@ -24,7 +24,7 @@ $(document).ready(function () {
 
     var petitionID = sessionStorage.getItem('cardId');
 
-    fetch('http://localhost:1337/petition/retrieve', {
+    fetch('http://localhost:1337/petition/retrieve/single', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + user.token,
