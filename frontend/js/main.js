@@ -89,6 +89,20 @@ $(document).ready(function () {
                 console.log('Fetch Error :-S', err);
             });
     });
+
+    $(".petition-card").on('click', function (e) {
+
+        // $postContainer = $(this).closest(".post-container");
+        // title = $postContainer.find(".post-title").text();
+        // content = $postContainer.find(".post-content").text();
+
+        $clickedCard = $(this).closest(".petition-card");
+        id = $clickedCard.find("#selected-card-id").text();
+        console.log($clickedCard.find("#selected-card-title").text());
+        sessionStorage.setItem("cardId", id);
+        window.sessionStorage.setItem("cardId", id);
+    });
+
 })
 
 function createAndAppendPetitions(petitions) {

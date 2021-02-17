@@ -98,18 +98,5 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
-const onClickPetitionCard = () => {
-    $(".petition-card").on('click', function (e) {
-
-        $clickedCard = $(this).closest(".petition-card");
-        id = $clickedCard.find("#selected-card-id").text();
-    });
-    sessionStorage.setItem("cardId", id);
-}
-
-const getPetitionAtts = () => {
-    var id
-}
-
 // new petition -> new post
 // sign petition -> 
