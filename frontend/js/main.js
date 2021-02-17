@@ -1,4 +1,32 @@
-const token
+function setLocalStorageWithExpiry(key, value, ttl) {
+    const now = new Date()
+
+    // `item` is an object which contains the original value
+    // as well as the time when it's supposed to expire
+    const item = {
+        value: value,
+        expiry: now.getTime() + ttl,
+    }
+    window.localStorage.setItem(key, JSON.stringify(item))
+}
+
+function getLocalStorageWithExpiry(key) {
+    const itemStr = window.localStorage.getItem(key)
+    // if the item doesn't exist, return null
+    if (!itemStr) {
+        return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+    // compare the expiry time of the item with the current time
+    if (now.getTime() > item.expiry) {
+        // If the item is expired, delete the item from storage
+        // and return null
+        window.localStorage.removeItem(key)
+        return undefined
+    }
+    return item.value
+}
 
 transitionToPage = function (href) {
     document.querySelector('body').style.opacity = 0
@@ -13,9 +41,9 @@ transitionToPage = function (href) {
 //     }, 0)
 // })
 
-showLoginAlert = message => {
+showLoginAlert = (message, style = 'danger') => {
     $('#alert-zone').html(`
-        <div id="login-alert" class="alert alert-danger alert-dismissible fade show mx-auto" style="display:none;" role="alert">
+        <div id="login-alert" class="alert alert-${style} alert-dismissible fade show mx-auto" style="display:none;" role="alert">
             <button id="dismiss-alert" type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -156,22 +184,6 @@ const logout = () => {
     // showLoggedOutButtons()
 }
 
-
-showLoginAlert = (message) => {
-    // $('#alert-zone').html(`
-    //     <div id="login-alert" class="alert alert-${style} alert-dismissible fade show mx-auto" style="display:none;" role="alert">
-    //         <button id="dismiss-alert" type="button" class="close" data-dismiss="alert" aria-label="Close">
-    //             <span aria-hidden="true">&times;</span>
-    //         </button>
-    //         ${message}
-    //     </div>
-    // `);
-
-    // $('#login-alert').slideDown("fast");
-
-
-    // TODO
-}
 
 function createAndAppendPosts(posts) {
     // $posts = createPostElements(posts);
