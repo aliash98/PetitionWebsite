@@ -73,12 +73,18 @@ $(document).ready(function () {
                 function (response) {
                     if (response.status !== 201) {
                         if (response.status == 403) {
+                            // document.getElementById("sign-petition").disabled = true;
+                            $('#sign-petition').prop('disabled', true);
+                            showNotifAlert('زمان این دادخواست به پایان رسیده است!');
                             response.text().then(txt => {
                                 let json_obj = JSON.parse(txt);
                                 if (json_obj) {
                                     console.log(json_obj.message);
                                 }
                             })
+                        }
+                        else if (response.status == 401) {
+                            showNotifAlert('شما قبلا این دادخواست را امضا کرده‌اید!');
                         }
                         else {
                             console.log('Looks like there was a problem. Status Code: ' + response.status);
@@ -109,6 +115,19 @@ function showPetitionCard(petition) {
     $petition.find("#petition-start-date").text(formatDate(array_json.createdAt));
     $petition.find("#petition-end-date").text(formatDate(array_json.dueDate));
     $petition.find("#petition-signers").text(array_json.signatureNum);
+}
+
+showNotifAlert = (message, style = 'danger') => {
+    $('#alert-zone').html(`
+        <div id="login-alert" class="alert alert-${style} alert-dismissible fade show mx-auto" style="display:none;" role="alert">
+            <button id="dismiss-alert" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            ${message}
+        </div>
+    `);
+
+    $('#login-alert').slideDown("fast");
 }
 
 function formatDate(date) {

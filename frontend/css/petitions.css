@@ -211,7 +211,6 @@ body {
 }
 
 .card-title {
-    white-space: pre-line;
     display: block;
     width: 398px;
     height: 33.5px;
@@ -231,6 +230,7 @@ body {
 }
 
 .card-txt {
+    white-space: pre-line;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;

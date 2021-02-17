@@ -197,43 +197,7 @@ body {
     border-radius: 5px;
 }
 
-/* Create Petition Float Button */
-
-.create-petition-btn-float {
+.notification-alert {
     position: fixed;
-    bottom: 7.5px;
-    left: 15px;
-    z-index: 10px;
-    background-color: var(--cerulean-blue) !important;
-    border: none !important;
-    color: var(--white) !important;
-    height: 50px !important;
-    border-radius: 10px !important;
-    width: 40px !important;
-}
-
-/* Plus Icon */
-
-.gg-math-plus, .gg-math-plus::after {
-    display: block;
-    box-sizing: border-box;
-    background: currentColor;
-    border-radius: 10px
-}
-
-.gg-math-plus {
-    margin-top: -2px;
-    position: relative;
-    transform: scale(var(--ggs, 1));
-    width: 20px;
-    height: 4px
-}
-
-.gg-math-plus::after {
-    content: "";
-    position: absolute;
-    width: 4px;
-    height: 20px;
-    top: -8px;
-    left: 8px
+    margin: 0 0 0 0;
 }
