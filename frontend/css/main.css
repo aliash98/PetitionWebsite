@@ -105,30 +105,6 @@ body {
     align-items: center;
 }
 
-/* a {
-    font-weight: lighter !important;
-    position: relative;
-    top: 7.5px;
-    height: 59.5px !important;
-    color: var(--rich-black) !important;
-    text-align: center;
-}
-
-a.active.nav-link {
-    background-color: transparent !important;
-    border: none !important;
-    border-bottom: 3px solid var(--rich-black) !important;
-}
-
-a.nav-link:hover {
-    border: none !important;
-}
-
-a.active.nav-link:hover {
-    border: none !important;
-    border-bottom: 3px solid var(--rich-black) !important;
-} */
-
 /***************** Bottom Nav *****************/
 
 #bottom-nav {

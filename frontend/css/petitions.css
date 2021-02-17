@@ -73,16 +73,6 @@ body {
     color: var(--cerulean-blue);
 }
 
-/* Create Petition Fixed Button */
-
-.create-petition-btn-fixed {
-    background-color: var(--cerulean-blue) !important;
-    width: 200px;
-    height: 50px;
-    border-radius: 5px !important;
-    font-size: large;
-}
-
 #toggle-menu-btn {
     cursor: pointer;
     display: none;
@@ -200,19 +190,8 @@ body {
     border-radius: 1px;
 }
 
-/* Create Petition Float Button */
-
-.create-petition-btn-float {
-    position: fixed;
-    bottom: 7.5px;
-    left: 15px;
-    z-index: 10px;
-    background-color: var(--cerulean-blue) !important;
-    border: none !important;
-    color: var(--white) !important;
-    height: 50px !important;
-    border-radius: 10px !important;
-    width: 40px !important;
+.all-petitions {
+    height: 225.5px;
 }
 
 /* Petition Card */
