@@ -9,6 +9,7 @@
     --silver: #c6c6c6ff;
     --cerulean-blue: #0857d1ff;
     --rich-black: #0d0d0dff;
+    --champagne: #ece4d5ff;
     background-color: var(--platinum);
 }
 
@@ -62,6 +63,16 @@ body {
     color: var(--cerulean-blue);
     position: absolute;
     left: 3vw;
+}
+
+/* Create Petition Fixed Button */
+
+.create-petition-btn-fixed {
+    background-color: var(--cerulean-blue) !important;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px !important;
+    font-size: large;
 }
 
 #toggle-menu-btn {
@@ -125,13 +136,19 @@ a.active.nav-link:hover {
     padding-left: 10vw;
     padding-right: 10vw;
     flex-direction: column;
+    overflow-y: hidden;
+    /* max-height: 500px; */
+    /* approximate max height */
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
 #search-nav {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100px;
+    height: 150px;
     align-items: center;
     justify-content: space-between;
     background-color: var(--platinum);
@@ -149,6 +166,7 @@ a.active.nav-link:hover {
     color: var(--white) !important;
     width: 175px !important;
     height: 50px !important;
+    border-radius: 5px !important;
 }
 
 #info-div {
@@ -176,9 +194,9 @@ a.active.nav-link:hover {
     top: 2.25px;
 }
 
-/* Create Petition Fixed Button */
+/* Create Petition Float Button */
 
-.create-petition-btn {
+.create-petition-btn-float {
     position: fixed;
     bottom: 7.5px;
     left: 15px;
@@ -189,6 +207,154 @@ a.active.nav-link:hover {
     height: 50px !important;
     border-radius: 10px !important;
     width: 40px !important;
+}
+
+/* Petition Silder */
+
+.petitions {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    margin-top: 50px;
+    border-radius: 10px;
+    justify-content: space-between;
+    background-color: var(--champagne);
+    flex-direction: column;
+    align-items: center;
+}
+
+.petitions-title {
+    height: 75px;
+    width: 100%;
+    text-align: start;
+    padding-right: 3vw;
+    padding-left: 3vw;
+    justify-content: space-between;
+}
+
+.petition-slider-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.petition-slider-view-all-btn {
+    background: transparent !important;
+    border: none !important;
+    color: var(--cerulean-blue) !important;
+    font-weight: lighter !important;
+    flex-direction: row
+}
+
+.petition-slider-view-all-btn:focus {
+    outline: none !important;
+}
+
+.petitions-cards {
+    width: 94%;
+    height: 222.5px;
+    position: relative;
+    bottom: 15px;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    background: transparent;
+}
+
+/* Petition Card */
+
+.petition-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 400px;
+    min-width: 400px;
+    background-color: var(--platinum);
+    margin-left: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--silver);
+}
+
+.card-title {
+    display: block;
+    width: 398px;
+    height: 33.5px;
+    text-align: start;
+    justify-content: start;
+    float: right;
+    padding-right: 7.5px;
+    padding-left: 7.5px;
+    font-size: large;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    top: 5px;
+    border-bottom: 1px solid var(--silver);
+    color: var(--rich-black);
+}
+
+.card-txt {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    width: 398px;
+    height: calc(100% - 80px);
+    padding: 0px 7.5px 0px 7.5px;
+    text-align: justify;
+    float: right;
+    justify-content: start;
+    font-weight: lighter;
+    color: var(--rich-black);
+    border-bottom: 1px solid var(--silver);
+    opacity: 0.7;
+}
+
+.card-date {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 30px;
+    width: 398px;
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+    position: relative;
+    top: 2px;
+}
+
+.card-date-txt {
+    color: var(--cerulean-blue);
+    font-weight: lighter;
+    font-size: 14px;
+}
+
+/* Left Chevron */
+
+.gg-chevron-left {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid transparent;
+    border-radius: 100px
+}
+
+.gg-chevron-left::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+    transform: rotate(45deg);
+    left: 6px;
+    top: 4px
 }
 
 /* Plus Icon */
