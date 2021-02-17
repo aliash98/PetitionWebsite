@@ -190,7 +190,6 @@ const signPetition = async (petitionId, signer) => {
     }, (error) => {
       console.log("Error occured when retrieving petition: " + error);
     });
-  console.log(flag);
   if (flag)
     return Promise.reject({ code: 125, message: "User has already signed this petition!" }); // 125 is the code number?
   return 1;
@@ -203,8 +202,9 @@ app.post('/petition/sign', authenticateToken, (req, res) => {
     console.log("Petition signed");
     res.status(201).send({ "OK": "ok" });
   }, reason => {
-    if (reason.code == 125){
+    if (reason.code == 125) {
       res.status(403);
+      console.log("This has signed this petition before!");
     }
     res.send({ "message": reason.message });
   })
@@ -241,7 +241,7 @@ const getPetitions = async () => {
 app.get('/petition/retrieve', authenticateToken, (req, res) => {
   getPetitions().then(value => {
     res.json({
-      "post": value
+      "petition": value
     });
   }, reason => {
     res.send("something went wrong " + reason);
@@ -335,7 +335,76 @@ app.get('/petition/userpetitions', authenticateToken, (req, res) => {
   let user = req.user;
   getUserPetitions(user).then(value => {
     res.json({
-      "post": value
+      "petition": value
+    });
+  }, reason => {
+    res.send("something went wrong " + reason);
+  });
+})
+
+
+// RETRIEVING 5 RANDOM PETITIONS
+
+const compare = (a, b) => {
+  const signNumA = a["signatureNum"];
+  const signNumB = b["signatureNum"];
+  return -(signNumA - signNumB);
+}
+
+app.get('/petition/retrieve/top', authenticateToken, (req, res) => {
+  getPetitions().then(value => {
+    value.sort(compare);
+    first_five = value.slice(0, 6);
+    res.json({
+      "petition": value
+    });
+  }, reason => {
+    res.send("something went wrong " + reason);
+  });
+})
+
+
+// RETRIEVING CLOSED PETITIONS
+
+app.get('/petition/retrieve/closed', authenticateToken, (req, res) => {
+  getPetitions().then(value => {
+    let closed = [];
+    let now = new Date();
+    console.log(now);
+    for (let i = 0; i < value.length; i++) {
+      if (value.dueDate !== undefined) {
+        if (now > value[i].dueDate) {
+          closed.push(value[i]);
+          if (closed.length == 10)
+            break;
+        }
+      }
+    }
+    res.json({
+      "petition": closed
+    });
+  }, reason => {
+    res.send("something went wrong " + reason);
+  });
+})
+
+
+// RETRIEVING OPEN PETITIONS
+
+app.get('/petition/retrieve/open', authenticateToken, (req, res) => {
+  getPetitions().then(value => {
+    let open = [];
+    let now = new Date();
+    console.log(now);
+    for (let i = 0; i < value.length; i++) {
+      if (value[i].dueDate === undefined || now < value[i].dueDate) {
+        open.push(value[i]);
+        if (open.length == 10)
+          break;
+      }
+    }
+    res.json({
+      "petition": open
     });
   }, reason => {
     res.send("something went wrong " + reason);
