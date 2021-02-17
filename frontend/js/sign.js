@@ -73,8 +73,12 @@ $(document).ready(function () {
                 function (response) {
                     if (response.status !== 201) {
                         if (response.status == 403) {
-                            console.log('kir', response.message);
-                            console.log(response.body.message);
+                            response.text().then(txt => {
+                                let json_obj = JSON.parse(txt);
+                                if (json_obj) {
+                                    console.log(json_obj.message);
+                                }
+                            })
                         }
                         else {
                             console.log('Looks like there was a problem. Status Code: ' + response.status);
