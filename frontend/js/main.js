@@ -100,6 +100,8 @@ $(document).ready(function () {
     $('#post-form').on('submit', function (e) {
         e.preventDefault();
 
+        var date = new Date($("#petitionDate").val() + "T00:00:00.000Z");
+
         fetch('http://localhost:1337/petition/new', {
             method: "POST",
             headers: {
@@ -110,7 +112,7 @@ $(document).ready(function () {
                 title: $("#petitionTitle").val(),  // TODO
                 content: $("#petitionText").val(), //TODO
                 category: $("#petitionCategory").val(),
-                // dueDate: TODO
+                dueDate: date,
             }),
         })
             .then(

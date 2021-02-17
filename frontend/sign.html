@@ -51,7 +51,7 @@
                 <span class="profile-txt">
                     شماره دانشجویی:
                 </span>
-                <span id=" user-studentId-placeholder" class="profile-txt">
+                <span id="user-studentId-placeholder" class="profile-txt">
                 </span>
             </div>
         </div>
@@ -110,61 +110,6 @@
 
         <!-- ################################################## -->
         <div style="width: 100%; height: 100px;"></div>
-    </div>
-
-    <button type="button"
-        class="d-flex btn create-petition-btn-float my-2 p-2 justify-content-center align-items-center"
-        id="create-petition-btn" data-toggle="modal" data-target="#formModal">
-        <i class="gg-math-plus"></i>
-    </button>
-
-    <div class="modal fade mr-auto" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class=" modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title m-auto" id="modalTitle">دادخواست جدید</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="alert alert-danger text-center d-none" id="form-error-msg"></div>
-                    <form id="post-form">
-                        <div class="form-group">
-                            <label for="petitionTitle" style="float: right;">
-                                عنوان
-                            </label>
-                            <input type="text" class="form-control" id="petitionTitle" name="title"
-                                placeholder="عنوان دادخواست را بنویسید..." style="font-weight: lighter;">
-                        </div>
-                        <div class="form-group">
-                            <label for="petitionCategory" style="float: right;">
-                                دانشکده
-                            </label>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle form-control" type="button"
-                                    id="petitionCategory" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    دانشکده مورد نظر خود را انتخاب کنید.
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="petitionCategory">
-                                    <a class="dropdown-item" href="#" style="text-align: center;">مهندسی کامپیوتر</a>
-                                    <a class="dropdown-item" href="#" style="text-align: center;">مهندسی برق</a>
-                                    <a class="dropdown-item" href="#" style="text-align: center;">مهندسی صنایع</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="petitionText" style="float: right;">متن</label>
-                            <textarea name="content" class="form-control" id="petitionText" cols="30" rows="10"
-                                placeholder="متن دادخواست را بنویسید..." style="font-weight: lighter;"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block"
-                            style="background-color: var(--cerulean-blue); height: 40px !important;">
-                            ایجاد
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
