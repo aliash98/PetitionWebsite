@@ -203,7 +203,10 @@ app.post('/petition/sign', authenticateToken, (req, res) => {
     console.log("Petition signed");
     res.status(201).send({ "OK": "ok" });
   }, reason => {
-    res.status(400).send({ "message": reason.message });
+    if (reason.code == 125){
+      res.status(403);
+    }
+    res.send({ "message": reason.message });
   })
 })
 
@@ -276,6 +279,7 @@ const getSinglePetition = async (petitionId) => {
 }
 
 app.post('/petition/retrieve/single', authenticateToken, (req, res) => {
+  console.log(req.body.petitionId);
   getSinglePetition(req.body.petitionId).then(value => {
     console.log("Successfully retrieved a single petition")
     res.json({
