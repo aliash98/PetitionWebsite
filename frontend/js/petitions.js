@@ -72,7 +72,7 @@ function createAllPetitionElements(allPetitions) {
     allPetitionElements = [];
 
     array_json = allPetitions["petition"];
-
+    console.log(array_json);
     var i;
 
     for (i = 0; i < array_json.length; i++) {
@@ -86,6 +86,7 @@ function createAllPetitionElements(allPetitions) {
 
         allPetitionElements.push($allPetitions)
     }
+    console.log(allPetitionElements);
     return allPetitionElements;
 }
 
