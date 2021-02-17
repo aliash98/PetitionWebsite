@@ -220,7 +220,7 @@ const getPetitions = async () => {
   for (let i = 0; i < results.length; i++) {
     const object = results[i];
     this_post = {
-      id: object.get('objectId'),
+      id: object.id,
       title: object.get('title'),
       content: object.get('content'),
       createdBy: object.get('createdBy'),
@@ -253,22 +253,49 @@ const getSinglePetition = async (petitionId) => {
   const query = new Parse.Query(Petition);
   console.log(petitionId);
   var this_petition;
-  await query.get(petitionId)
-    .then((object) => {
-      this_petition = {
-        id: object.get('objectId'),
-        title: object.get('title'),
-        content: object.get('content'),
-        createdBy: object.get('createdBy'),
-        createdAt: object.get('createdAt'),
-        signatureNum: object.get('signatureNum'),
-        dueDate: object.get('dueDate'),
-        category: object.get('category')
-        // no need to send the signatureDates
-      }
-    }, (error) => {
-      console.log("Error occured when retrieving petition: " + error);
-    });
+  const object = await query.get(petitionId);
+  var username;
+  const createdBy_query = new Parse.Query("User");
+  await createdBy_query.get(object.get('createdBy').id).then((userObject) => {
+    username = userObject.get('username');
+  }, (error) => {
+    console.log("Error retrieving createdBy user!" + error);
+  });
+  this_petition = {
+    id: object.id,
+    title: object.get('title'),
+    content: object.get('content'),
+    createdBy: username,
+    createdAt: object.get('createdAt'),
+    signatureNum: object.get('signatureNum'),
+    dueDate: object.get('dueDate'),
+    category: object.get('category')
+    // no need to send the signatureDates
+  }
+
+  // await query.get(petitionId)
+  //   .then((object) => {
+  //     var username;
+  //     const createdBy_query = new Parse.Query("User");
+  //     await createdBy_query.get(object.get('createdBy').id).then((userObject) => {
+  //       username = userObject.get('username');
+  //     }, (error) => {
+  //       console.log("Error retrieving createdBy user!" + error);
+  //     });
+  //     this_petition = {
+  //       id: object.id,
+  //       title: object.get('title'),
+  //       content: object.get('content'),
+  //       createdBy: object.get('createdBy'),
+  //       createdAt: username,
+  //       signatureNum: object.get('signatureNum'),
+  //       dueDate: object.get('dueDate'),
+  //       category: object.get('category')
+  //       // no need to send the signatureDates
+  //     }
+  //   }, (error) => {
+  //     console.log("Error occured when retrieving petition: " + error);
+  //   });
   return this_petition;
 }
 
@@ -299,11 +326,19 @@ const getUserPetitions = async (user) => {
   let petitions = [];
   for (let i = 0; i < results.length; i++) {
     const object = results[i];
+    var username;
+    const createdBy_query = new Parse.Query("User");
+    await createdBy_query.get(object.get('createdBy').id).then((userObject) => {
+      username = userObject.get('username');
+    }, (error) => {
+      console.log("Error retrieving createdBy user!" + error);
+    });
+
     this_post = {
-      id: object.get('objectId'),
+      id: object.id,
       title: object.get('title'),
       content: object.get('content'),
-      createdBy: object.get('createdBy'),
+      createdBy: username,
       createdAt: object.get('createdAt'),
       signatureNum: object.get('signatureNum'),
       dueDate: object.get('dueDate'),
