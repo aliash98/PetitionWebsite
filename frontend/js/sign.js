@@ -54,6 +54,41 @@ $(document).ready(function () {
     ).catch(function (err) {
         console.log('Fetch Error :-S', err);
     });
+
+    $("#sign-petition").on('click', function (e) {
+        e.preventDefault();
+
+        fetch('http://localhost:1337/petition/sign', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + user.token,
+            },
+            body: JSON.stringify({
+                petitionId: petitionID,
+                // dueDate: TODO
+            }),
+        })
+            .then(
+                function (response) {
+                    if (response.status !== 201) {
+                        if (response.status == 403) {
+                            console.log('kir', response.message);
+                            console.log(response.body.message);
+                        }
+                        else {
+                            console.log('Looks like there was a problem. Status Code: ' + response.status);
+                        }
+                        return;
+                    }
+                    window.location.reload();
+                    // TODO Successful
+                }
+            )
+            .catch(function (err) {
+                console.log('Fetch Error :-S', err);
+            });
+    });
 })
 
 function showPetitionCard(petition) {

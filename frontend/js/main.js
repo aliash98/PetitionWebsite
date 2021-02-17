@@ -110,7 +110,6 @@ $(document).ready(function () {
         window.sessionStorage.setItem("cardId", id);
         transitionToPage('sign.html');
     });
-
 })
 
 function createAndAppendPetitions(petitions) {
