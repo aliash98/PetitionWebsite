@@ -53,7 +53,6 @@
                     شماره دانشجویی:
                 </span>
                 <span id=" user-studentId-placeholder" class="profile-txt">
-                    96106055
                 </span>
             </div>
         </div>
@@ -129,7 +128,7 @@
             </div>
         </div>
 
-        <div id="open-petitions" class="d-flex petitions" style="background-color: #dae7deff;">
+        <div id="open-petitions" class="d-flex petitions">
             <div id="open-petitions-title" class="d-flex align-items-center petitions-title">
                 <span class="petition-slider-title">
                     دادخواست‌های باز
@@ -140,28 +139,29 @@
                 </button>
             </div>
             <div id="open-petitions-cards" class="d-flex petitions-container">
-                <div class="petition-card open-p cloneable-open-petitions d-none">
-                    <span class="card-title">
+                <div class="petition-card open-p cloneable-open-petitions d-none" role="button">
+                    <span id="open-card-title" class="card-title">
                     </span>
-                    <span class="card-txt">
+                    <span id="open-card-content" class="card-txt">
                     </span>
                     <div class="card-date">
-                        <span class="card-date-txt">
+                        <span id="open-card-created-at" class="card-date-txt">
                         </span>
                         <span class="card-date-txt">
                             تا
                         </span>
-                        <span class="card-date-txt">
+                        <span id="open-card-due-date" class="card-date-txt">
                         </span>
                     </div>
+                    <span id="open-card-id" hidden></span>
                 </div>
             </div>
         </div>
 
-        <div id="closed-petitions" class="d-flex petitions" style="background-color: #e0e0e0ff;">
+        <div id="closed-petitions" class="d-flex petitions">
             <div id="closed-petitions-title" class="d-flex align-items-center petitions-title">
                 <span class="petition-slider-title">
-                    دادخواست‌های بسته
+                    دادخواست‌های برگزیده
                 </span>
                 <button class="petition-slider-view-all-btn d-flex">
                     مشاهده‌ی همه
@@ -169,20 +169,21 @@
                 </button>
             </div>
             <div id="closed-petitions-cards" class="d-flex petitions-container">
-                <div class="petition-card closed-p cloneable-closed-petitions d-none">
-                    <span class="card-title">
+                <div class="petition-card closed-p cloneable-closed-petitions d-none" role="button">
+                    <span id="closed-card-title" class="card-title">
                     </span>
-                    <span class="card-txt">
+                    <span id="closed-card-content" class="card-txt">
                     </span>
                     <div class="card-date">
-                        <span class="card-date-txt">
+                        <span id="closed-card-created-at" class="card-date-txt">
                         </span>
                         <span class="card-date-txt">
                             تا
                         </span>
-                        <span class="card-date-txt">
+                        <span id="closed-card-due-date" class="card-date-txt">
                         </span>
                     </div>
+                    <span id="closed-card-id" hidden></span>
                 </div>
             </div>
         </div>

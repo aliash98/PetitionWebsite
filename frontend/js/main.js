@@ -128,109 +128,100 @@ $(document).ready(function () {
     });
 
     $(".selected-p").on('click', function (e) {
-
-        $clickedCard = $(this).closest(".selected-p");
-        id = $clickedCard.find("#selected-card-id").text();
-        console.log($clickedCard.find("#selected-card-title").text());
+        $selectedClickedCard = $(this).closest(".selected-p");
+        id = $selectedClickedCard.find("#selected-card-id").text();
         sessionStorage.setItem("cardId", id);
-        window.sessionStorage.setItem("cardId", id);
         transitionToPage('sign.html');
     });
 
     $(".open-p").on('click', function (e) {
-
-        $clickedCard = $(this).closest(".open-p");
-        id = $clickedCard.find("#open-card-id").text();
-        console.log($clickedCard.find("#open-card-title").text());
+        $openClickedCard = $(this).closest(".open-p");
+        id = $openClickedCard.find("#open-card-id").text();
         sessionStorage.setItem("cardId", id);
-        window.sessionStorage.setItem("cardId", id);
         transitionToPage('sign.html');
     });
 
     $(".closed-p").on('click', function (e) {
-
-        $clickedCard = $(this).closest(".closed-p");
-        id = $clickedCard.find("#closed-card-id").text();
-        console.log($clickedCard.find("#closed-card-title").text());
+        $closedClickedCard = $(this).closest(".closed-p");
+        id = $closedClickedCard.find("#closed-card-id").text();
         sessionStorage.setItem("cardId", id);
-        window.sessionStorage.setItem("cardId", id);
         transitionToPage('sign.html');
     });
 })
 
-function createAndAppendSelectedPetitions(petitions) {
-    $petitions = createSelectedPetitionElements(petitions);
-    $("#selected-petitions-cards").append($petitions);
+function createAndAppendSelectedPetitions(selectedPetitions) {
+    $selectedPetitions = createSelectedPetitionElements(selectedPetitions);
+    $("#selected-petitions-cards").append($selectedPetitions);
 }
 
-function createAndAppendOpenPetitions(petitions) {
-    $petitions = createOpenPetitionElements(petitions);
-    $("#open-petitions-cards").append($petitions);
+function createAndAppendOpenPetitions(openPetitions) {
+    $openPetitions = createOpenPetitionElements(openPetitions);
+    $("#open-petitions-cards").append($openPetitions);
 }
 
-function createAndAppendClosedPetitions(petitions) {
-    $petitions = createClosedPetitionElements(petitions);
-    $("#closed-petitions-cards").append($petitions);
+function createAndAppendClosedPetitions(closedPetitions) {
+    $closedPetitions = createClosedPetitionElements(closedPetitions);
+    $("#closed-petitions-cards").append($closedPetitions);
 }
 
-function createSelectedPetitionElements(petitions) {
-    petitionElements = [];
+function createSelectedPetitionElements(selectedPetitions) {
+    selectedPetitionElements = [];
 
-    array_json = petitions["petition"];
+    array_json = selectedPetitions["petition"];
 
     var i;
 
     for (i = 0; i < array_json.length; i++) {
-        $petition = $(".cloneable-selected-petitions").clone(true);
-        $petition.removeClass('d-none cloneable-selected-petitions');
-        $petition.find("#selected-card-title").text(array_json[i].title);
-        $petition.find("#selected-card-content").text(array_json[i].content);
-        $petition.find("#selected-card-id").text(array_json[i].id);
-        $petition.find("#selected-card-created-at").text(formatDate(array_json[i].createdAt));
+        $selectedPetitions = $(".cloneable-selected-petitions").clone(true);
+        $selectedPetitions.removeClass('d-none cloneable-selected-petitions');
+        $selectedPetitions.find("#selected-card-title").text(array_json[i].title);
+        $selectedPetitions.find("#selected-card-content").text(array_json[i].content);
+        $selectedPetitions.find("#selected-card-id").text(array_json[i].id);
+        $selectedPetitions.find("#selected-card-created-at").text(formatDate(array_json[i].createdAt));
 
-        petitionElements.push($petition)
+        selectedPetitionElements.push($selectedPetitions)
     }
-    return petitionElements;
+    return selectedPetitionElements;
 }
 
-function createOpenPetitionElements(petitions) {
-    petitionElements = [];
+function createOpenPetitionElements(openPetitions) {
+    openPetitionElements = [];
 
-    array_json = petitions["petition"];
+    array_json = openPetitions["petition"];
 
     var i;
 
     for (i = 0; i < array_json.length; i++) {
-        $petition = $(".cloneable-open-petitions").clone(true);
-        $petition.removeClass('d-none cloneable-open-petitions');
-        $petition.find("#open-card-title").text(array_json[i].title);
-        $petition.find("#open-card-content").text(array_json[i].content);
-        $petition.find("#open-card-id").text(array_json[i].id);
-        $petition.find("#open-card-created-at").text(formatDate(array_json[i].createdAt));
+        $openPetitions = $(".cloneable-open-petitions").clone(true);
+        $openPetitions.removeClass('d-none cloneable-open-petitions');
+        $openPetitions.find("#open-card-title").text(array_json[i].title);
+        $openPetitions.find("#open-card-content").text(array_json[i].content);
+        $openPetitions.find("#open-card-id").text(array_json[i].id);
+        $openPetitions.find("#open-card-created-at").text(formatDate(array_json[i].createdAt));
 
-        petitionElements.push($petition)
+        openPetitionElements.push($openPetitions)
     }
-    return petitionElements;
+    return openPetitionElements;
 }
 
-function createClosedPetitionElements(petitions) {
-    petitionElements = [];
+function createClosedPetitionElements(closedPetitions) {
+    closedPetitionElements = [];
 
-    array_json = petitions["petition"];
+    array_json = closedPetitions["petition"];
 
     var i;
 
     for (i = 0; i < array_json.length; i++) {
-        $petition = $(".cloneable-closed-petitions").clone(true);
-        $petition.removeClass('d-none cloneable-closed-petitions');
-        $petition.find("#closed-card-title").text(array_json[i].title);
-        $petition.find("#closed-card-content").text(array_json[i].content);
-        $petition.find("#closed-card-id").text(array_json[i].id);
-        $petition.find("#closed-card-created-at").text(formatDate(array_json[i].createdAt));
+        $closedPetitions = $(".cloneable-closed-petitions").clone(true);
+        $closedPetitions.removeClass('d-none cloneable-closed-petitions');
+        $closedPetitions.find("#closed-card-title").text(array_json[i].title);
+        $closedPetitions.find("#closed-card-content").text(array_json[i].content);
+        $closedPetitions.find("#closed-card-id").text(array_json[i].id);
+        $closedPetitions.find("#closed-card-created-at").text(formatDate(array_json[i].createdAt));
 
-        petitionElements.push($petition)
+        closedPetitionElements.push($closedPetitions)
     }
-    return petitionElements;
+    return closedPetitionElements;
 }
 
 function formatDate(date) {
