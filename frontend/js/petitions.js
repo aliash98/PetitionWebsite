@@ -64,7 +64,7 @@ $(document).ready(function () {
 })
 
 function createAndAppendAllPetitions(allPetitions) {
-    $allPetitions = createClosedPetitionElements(allPetitions);
+    $allPetitions = createAllPetitionElements(allPetitions);
     $("#all-petitions-cards").append($allPetitions);
 }
 
