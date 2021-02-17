@@ -1,13 +1,39 @@
 const token
 
-const login = () => {
-    // const emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    // let email = $('#login-email-input').val();
-    // let password = $('#login-password-input').val();
+transitionToPage = function (href) {
+    document.querySelector('body').style.opacity = 0
+    setTimeout(function () {
+        window.location.href = href
+    }, 500)
+}
 
-    const emailReg = "96109606";  // Regex o radif kon
-    let studentId = "96109606";
-    let password ="alialiali";
+// document.addEventListener('DOMContentLoaded', function (event) {
+//     setTimeout(function () {
+//         document.querySelector('body').style.opacity = 1
+//     }, 0)
+// })
+
+showLoginAlert = message => {
+    $('#alert-zone').html(`
+        <div id="login-alert" class="alert alert-danger alert-dismissible fade show mx-auto" style="display:none;" role="alert">
+            <button id="dismiss-alert" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            ${message}
+        </div>
+    `);
+
+    $('#login-alert').slideDown("fast");
+}
+
+login = () => {
+    const emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    let studentId = $('#login-studentId-input').val();
+    let password = $('#login-password-input').val();
+
+    // const emailReg = "96109606";  // Regex o radif kon
+    // let studentId = "96109606";
+    // let password = "alialiali";
 
 
     if (studentId == '') {
@@ -15,10 +41,10 @@ const login = () => {
         return;
     }
 
-    if (!emailReg.test(studentId)) {
-        showLoginAlert('لطفا یک شماره دانشجویی متعبر وارد کنید!')
-        return;
-    }
+    // if (!emailReg.test(studentId)) {
+    //     showLoginAlert('لطفا یک شماره دانشجویی متعبر وارد کنید!')
+    //     return;
+    // }
 
     if (password == '') {
         showLoginAlert('لطفا رمز عبور خود را وارد کنید!')
@@ -29,34 +55,36 @@ const login = () => {
 
 
     fetch('http://localhost:1337/signin', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                            "studentID": studentId,
-                            "password": password
-                        }),
-            }).then(
-                function (response) {
-                    if (response.status !== 200) {
-                        console.log('Looks like there was a problem. Status Code: ' + response.status);
-                        return;
-                    }
-                    response.text().then(txt => {
-                        token = JSON.parse(txt)['accessToken'];
-                        // setLocalStorageWithExpiry('user', {
-                        //     token: token,
-                        //     email: studentId
-                        // }, 3600000);
-                        //showLoginAlert('Login successful', 'success');
-                        // showLoggedInButtons();
-                        // closeModal();
-                    });
-                })
-                .catch(function (err) {
-                    console.log('Fetch Error :-S', err);
-                });
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "studentID": studentId,
+            "password": password
+        }),
+    }).then(
+        function (response) {
+            if (response.status !== 200) {
+                console.log('Looks like there was a problem. Status Code: ' + response.status);
+                return;
+            }
+            response.text().then(txt => {
+                token = JSON.parse(txt)['accessToken'];
+                setLocalStorageWithExpiry('user', {
+                    token: token,
+                    studentId: studentId,
+                    //email: email
+                }, 3600000);
+                showLoginAlert('Login successful', 'success');
+                transitionToPage(index.html);
+                // showLoggedInButtons();
+                // closeModal();
+            });
+        })
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        });
 }
 
 const register = () => {
@@ -65,8 +93,8 @@ const register = () => {
     // let password = $('#register-password-input').val();
     // let repeatPassword = $('#register-repeat-password-input').val();
     // let acceptRules = $('#register-accept-rules').prop('checked');
-    let email = "alialaee98@gmail.com" ;
-    let password = "alialiali" ;
+    let email = "alialaee98@gmail.com";
+    let password = "alialiali";
     let repeatPassword = "alialiali";
     let studentID = "96109606";
 
@@ -96,29 +124,29 @@ const register = () => {
     }
 
     fetch('http://localhost:1337/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                            "email": email,
-                            "studentID" : studentID,
-                            "password": password
-                        }),
-            })
-                .then(
-                    function (response) {
-                        if (response.status !== 201) {
-                            console.log('Looks like there was a problem. Status Code: ' + response.status);
-                            return;
-                        }
-                        response.text().then(txt =>
-                            console.log(txt));
-                    }
-                )
-                .catch(function (err) {
-                    console.log('Fetch Error :-S', err);
-                });
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "email": email,
+            "studentID": studentID,
+            "password": password
+        }),
+    })
+        .then(
+            function (response) {
+                if (response.status !== 201) {
+                    console.log('Looks like there was a problem. Status Code: ' + response.status);
+                    return;
+                }
+                response.text().then(txt =>
+                    console.log(txt));
+            }
+        )
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        });
 
 }
 
@@ -156,7 +184,7 @@ function createAndAppendPosts(posts) {
     //     array_json = [];
     //     array_json.push(posts["post"]);
     // }
-    for (i = 0; i < array_json.length; i++){
+    for (i = 0; i < array_json.length; i++) {
         // $post = $(".clonable-post").clone(true);
         // $post.removeClass('d-none clonable-post');
 
@@ -173,51 +201,51 @@ function createAndAppendPosts(posts) {
 }
 
 const getPetition = () => {
-    fetch('http://localhost:1337/petition/retrieve', 
-        {method: 'GET'}).then(
-        function (response) {
-            if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: ' + response.status);
-                return;
-            }
-            response.text().then(txt =>{
-                let json_obj = JSON.parse(txt);
-                if (json_obj){
-                    createAndAppendPosts(json_obj);
-                } else{
-                    $("#no-post-alert").removeClass("d-none");
+    fetch('http://localhost:1337/petition/retrieve',
+        { method: 'GET' }).then(
+            function (response) {
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' + response.status);
+                    return;
                 }
-            })  
-        }).catch(function (err) {
-            console.log('Fetch Error :-S', err);
-        });
+                response.text().then(txt => {
+                    let json_obj = JSON.parse(txt);
+                    if (json_obj) {
+                        createAndAppendPosts(json_obj);
+                    } else {
+                        $("#no-post-alert").removeClass("d-none");
+                    }
+                })
+            }).catch(function (err) {
+                console.log('Fetch Error :-S', err);
+            });
 }
 
 
 const newPetition = () => {
-    fetch( 'http://localhost:1337/petition/new', { 
+    fetch('http://localhost:1337/petition/new', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token,
         },
         body: JSON.stringify({
-                title: "My",  // TODO
-                content:"an", //TODO
-            }),
-        })
-            .then(
-                function (response) {
-                    if (response.status !== 201) {
-                        console.log('Looks like there was a problem. Status Code: ' + response.status);
-                        return;
-                    }
-                    //window.location.reload();    
+            title: "My",  // TODO
+            content: "an", //TODO
+        }),
+    })
+        .then(
+            function (response) {
+                if (response.status !== 201) {
+                    console.log('Looks like there was a problem. Status Code: ' + response.status);
+                    return;
                 }
-            )
-            .catch(function (err) {
-                console.log('Fetch Error :-S', err);
-            });
+                //window.location.reload();    
+            }
+        )
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        });
 }
 
 // new petition -> new post
