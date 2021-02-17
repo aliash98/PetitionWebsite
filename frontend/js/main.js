@@ -16,6 +16,13 @@ function getLocalStorageWithExpiry(key) {
     return item.value
 }
 
+transitionToPage = function (href) {
+    document.querySelector('body').style.opacity = 0
+    setTimeout(function () {
+        window.location.href = href
+    }, 500)
+}
+
 const user = getLocalStorageWithExpiry('user');
 
 $(document).ready(function () {
@@ -101,6 +108,7 @@ $(document).ready(function () {
         console.log($clickedCard.find("#selected-card-title").text());
         sessionStorage.setItem("cardId", id);
         window.sessionStorage.setItem("cardId", id);
+        transitionToPage('sign.html');
     });
 
 })
@@ -154,15 +162,6 @@ function formatDate(date) {
         day = '0' + day;
 
     return [year, month, day].join('-');
-}
-
-const onClickPetitionCard = () => {
-    $(".petition-card").on('click', function (e) {
-
-        $clickedCard = $(this).closest(".petition-card");
-        id = $clickedCard.find("#selected-card-id").text();
-    });
-    sessionStorage.setItem("cardId", id);
 }
 
 // new petition -> new post
