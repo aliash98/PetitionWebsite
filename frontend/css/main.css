@@ -85,11 +85,19 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     align-content: center;
     height: 75px;
 }
 
-a {
+.tabs-btn {
+    display: flex;
+    margin-left: 50px;
+    height: 100%;
+    align-items: center;
+}
+
+/* a {
     font-weight: lighter !important;
     position: relative;
     top: 7.5px;
@@ -111,7 +119,7 @@ a.nav-link:hover {
 a.active.nav-link:hover {
     border: none !important;
     border-bottom: 3px solid var(--rich-black) !important;
-}
+} */
 
 /***************** Bottom Nav *****************/
 

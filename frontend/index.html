@@ -38,7 +38,7 @@
             </span>
         </div>
         <div id="sub-menu" class="d-flex align-items-center">
-            <div class="nav nav-tabs tabs-div" id="nav-tab" role="tablist" style="border: 0px solid transparent;">
+            <!-- <div class="nav nav-tabs tabs-div" id="nav-tab" role="tablist" style="border: 0px solid transparent;">
                 <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                     aria-controls="nav-home" aria-selected="true">
                     خانه
@@ -51,11 +51,34 @@
                     aria-controls="nav-data" aria-selected="false">
                     آمار و ارقام
                 </a>
+            </div> -->
+            <div class="tabs-div" style="border: 0px solid transparent;">
+                <span role="button" class="tabs-btn" style="border-bottom: 3px solid var(--rich-black);" onclick="transitionToPage('index.html')">
+                    خانه
+                </span>
+                <span role="button" class="tabs-btn" onclick="transitionToPage('petitions.html')">
+                    دادخواست‌ها
+                </span>
             </div>
             <span class="profile-txt">
                 محسن لرنی، خوش آمدید.
             </span>
         </div>
+
+        <script>
+            transitionToPage = function (href) {
+                document.querySelector('body').style.opacity = 0
+                setTimeout(function () {
+                    window.location.href = href
+                }, 500)
+            }
+
+            document.addEventListener('DOMContentLoaded', function (event) {
+                setTimeout(function () {
+                    document.querySelector('body').style.opacity = 1
+                }, 0)
+            })
+        </script>
     </nav>
 
     <div id="main-container">
@@ -228,8 +251,9 @@
                                 دانشکده
                             </label>
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle form-control" type="button" id="petitionCategory"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-secondary dropdown-toggle form-control" type="button"
+                                    id="petitionCategory" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
                                     دانشکده مورد نظر خود را انتخاب کنید.
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="petitionCategory">

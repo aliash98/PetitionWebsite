@@ -38,24 +38,33 @@
             </span>
         </div>
         <div id="sub-menu" class="d-flex align-items-center">
-            <div class="nav nav-tabs tabs-div" id="nav-tab" role="tablist" style="border: 0px solid transparent;">
-                <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                    aria-controls="nav-home" aria-selected="true">
+            <div class="tabs-div" style="border: 0px solid transparent;">
+                <span role="button" class="tabs-btn" onclick="transitionToPage('index.html')">
                     خانه
-                </a>
-                <a class="nav-link" id="nav-data-tab" data-toggle="tab" href="#nav-data" role="tab"
-                    aria-controls="nav-data" aria-selected="false">
+                </span>
+                <span role="button" class="tabs-btn" onclick="transitionToPage('petitions.html')">
                     دادخواست‌ها
-                </a>
-                <a class="nav-link" id="nav-data-tab" data-toggle="tab" href="#nav-data" role="tab"
-                    aria-controls="nav-data" aria-selected="false">
-                    آمار و ارقام
-                </a>
+                </span>
             </div>
             <span class="profile-txt">
                 محسن لرنی، خوش آمدید.
             </span>
         </div>
+
+        <script>
+            transitionToPage = function (href) {
+                document.querySelector('body').style.opacity = 0
+                setTimeout(function () {
+                    window.location.href = href
+                }, 500)
+            }
+
+            document.addEventListener('DOMContentLoaded', function (event) {
+                setTimeout(function () {
+                    document.querySelector('body').style.opacity = 1
+                }, 0)
+            })
+        </script>
     </nav>
 
     <div id="main-container">
