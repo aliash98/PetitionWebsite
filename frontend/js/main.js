@@ -179,9 +179,14 @@ register = () => {
 
 }
 
-registerDone = (response) => {
+// registerDone = (response) => {
+//     $('#login-tab-btn').click()
+//     showLoginAlert(response.message, 'success')
+// }
+
+registerDone = () => {
     $('#login-tab-btn').click()
-    showLoginAlert(response.message, 'success')
+    showLoginAlert('ثبت نام با موفقیت انجام شد.', 'success')
 }
 
 const logout = () => {
