@@ -133,8 +133,8 @@ a.active.nav-link:hover {
     display: flex;
     width: 100%;
     margin: 75px 0 0 0;
-    padding-left: 10vw;
-    padding-right: 10vw;
+    padding-right: 5vw;
+    padding-left: 5vw;
     flex-direction: column;
     overflow-y: hidden;
     /* max-height: 500px; */
@@ -194,6 +194,20 @@ a.active.nav-link:hover {
     top: 2.25px;
 }
 
+.card-image {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 250px;
+    height: 250px;
+}
+
+.image-of-card-image {
+    width: 215px;
+    height: 215px;
+    border-radius: 1px;
+}
+
 /* Create Petition Float Button */
 
 .create-petition-btn-float {
@@ -209,59 +223,6 @@ a.active.nav-link:hover {
     width: 40px !important;
 }
 
-/* Petition Silder */
-
-.petitions {
-    width: 100%;
-    height: 300px;
-    position: relative;
-    margin-top: 50px;
-    border-radius: 10px;
-    justify-content: space-between;
-    background-color: var(--champagne);
-    flex-direction: column;
-    align-items: center;
-}
-
-.petitions-title {
-    height: 75px;
-    width: 100%;
-    text-align: start;
-    padding-right: 3vw;
-    padding-left: 3vw;
-    justify-content: space-between;
-}
-
-.petition-slider-title {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.petition-slider-view-all-btn {
-    background: transparent !important;
-    border: none !important;
-    color: var(--cerulean-blue) !important;
-    font-weight: lighter !important;
-    flex-direction: row
-}
-
-.petition-slider-view-all-btn:focus {
-    outline: none !important;
-}
-
-.petitions-container {
-    width: 94%;
-    height: 222.5px;
-    position: relative;
-    bottom: 15px;
-    flex-direction: row;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    background: transparent;
-}
-
 /* Petition Card */
 
 .petition-card {
@@ -271,9 +232,11 @@ a.active.nav-link:hover {
     max-width: 400px;
     min-width: 400px;
     background-color: var(--platinum);
-    margin-left: 40px;
+    margin-left: 20px;
+    margin-bottom: 20px;
     border-radius: 10px;
     border: 1px solid var(--silver);
+    background-color: white;
 }
 
 .card-title {

@@ -1,0 +1,226 @@
+* {
+    font-family: Vazir !important;
+    direction: rtl;
+}
+
+:root {
+    --platinum: #efefefff;
+    --white: #ffffffff;
+    --silver: #c6c6c6ff;
+    --cerulean-blue: #0857d1ff;
+    --rich-black: #0d0d0dff;
+    --champagne: #ece4d5ff;
+    background-color: var(--platinum);
+}
+
+body {
+    background-color: var(--platinum) !important;
+}
+
+/***************** Top Nav *****************/
+
+#top-nav {
+    background: var(--white);
+    height: 75px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid var(--silver);
+    z-index: 1;
+}
+
+/* Logo */
+
+.logo-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    right: 3vw;
+    bottom: 0.1667vh;
+    background-color: var(--cerulean-blue);
+    border-radius: 5px;
+}
+
+.logo-text {
+    color: var(--white);
+    font-size: 40px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+/* Sub Menu */
+
+#sub-menu {
+    width: calc(100% - 50px - 7.5vw);
+    height: 100%;
+}
+
+.profile-txt {
+    color: var(--cerulean-blue);
+    position: absolute;
+    left: 3vw;
+}
+
+/* Create Petition Fixed Button */
+
+.create-petition-btn-fixed {
+    background-color: var(--cerulean-blue) !important;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px !important;
+    font-size: large;
+}
+
+#toggle-menu-btn {
+    cursor: pointer;
+    display: none;
+    color: var(--rich-black);
+}
+
+.tabs-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    height: 75px;
+}
+
+a {
+    font-weight: lighter !important;
+    position: relative;
+    top: 7.5px;
+    height: 59.5px !important;
+    color: var(--rich-black) !important;
+    text-align: center;
+}
+
+a.active.nav-link {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 3px solid var(--rich-black) !important;
+}
+
+a.nav-link:hover {
+    border: none !important;
+}
+
+a.active.nav-link:hover {
+    border: none !important;
+    border-bottom: 3px solid var(--rich-black) !important;
+}
+
+/***************** Bottom Nav *****************/
+
+#bottom-nav {
+    background-color: var(--light-blue);
+    height: 75px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: 0 -2px 15px 0 #929292;
+    /* display: none; */
+}
+
+/************* Main Container *************/
+
+#main-container {
+    display: flex;
+    width: 100%;
+    margin: 75px 0 0 0;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    flex-direction: column;
+    overflow-y: hidden;
+    /* max-height: 500px; */
+    /* approximate max height */
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+#petition-title {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 50px;
+    margin-top: 75px;
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--cerulean-blue)
+}
+
+.petition-txt {
+    white-space: pre-line;
+    margin-right: 12.5vw;
+    margin-left: 12.5vw;
+    font-weight: lighter;
+    color: var(--rich-black);
+    text-align: justify;
+    font-size: large;
+}
+
+.petition-info {
+    border: 1px solid var(--rich-black);
+    border-radius: 1px;
+    margin-top: 25px;
+    margin-right: 12.5vw !important;
+    margin-left: 12.5vw !important;
+    padding-right: 0.5vw !important;
+    padding-left: 0.5vw !important;
+    opacity: 0.6;
+}
+
+.petition-date {
+    width: 50%; 
+    text-align: start;
+    font-weight: lighter;
+    color: var(--rich-black);
+    margin: 5px 0 5px 0;
+}
+
+/* Create Petition Float Button */
+
+.create-petition-btn-float {
+    position: fixed;
+    bottom: 7.5px;
+    left: 15px;
+    z-index: 10px;
+    background-color: var(--cerulean-blue) !important;
+    border: none !important;
+    color: var(--white) !important;
+    height: 50px !important;
+    border-radius: 10px !important;
+    width: 40px !important;
+}
+
+/* Plus Icon */
+
+.gg-math-plus, .gg-math-plus::after {
+    display: block;
+    box-sizing: border-box;
+    background: currentColor;
+    border-radius: 10px
+}
+
+.gg-math-plus {
+    margin-top: -2px;
+    position: relative;
+    transform: scale(var(--ggs, 1));
+    width: 20px;
+    height: 4px
+}
+
+.gg-math-plus::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 20px;
+    top: -8px;
+    left: 8px
+}
