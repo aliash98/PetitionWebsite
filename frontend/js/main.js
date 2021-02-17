@@ -50,6 +50,45 @@ $(document).ready(function () {
     ).catch(function (err) {
         console.log('Fetch Error :-S', err);
     });
+
+    // $("#create-petition-btn").on('click', function (e) {
+    //     $("#post-form").attr({
+    //         method: "POST",
+    //         action: "", //createPostUrl,
+    //     });
+    //     setModalAttributes("ایجاد پست جدید", "", "")
+    // });
+
+
+    $('#post-form').on('submit', function (e) {
+        e.preventDefault();
+
+        fetch('http://localhost:1337/petition/new', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            body: JSON.stringify({
+                title: $("#petitionTitle").val(),  // TODO
+                content: $("#petitionText").val(), //TODO
+                category: $("#petitionCategory").val(),
+                // dueDate: TODO
+            }),
+        })
+            .then(
+                function (response) {
+                    if (response.status !== 201) {
+                        console.log('Looks like there was a problem. Status Code: ' + response.status);
+                        return;
+                    }
+                    window.location.reload();
+                }
+            )
+            .catch(function (err) {
+                console.log('Fetch Error :-S', err);
+            });
+    });
 })
 
 function createAndAppendPetitions(petitions) {
@@ -101,28 +140,6 @@ function formatDate(date) {
 
     return [year, month, day].join('-');
 }
-
-const getPetition = () => {
-    fetch('http://localhost:1337/petition/retrieve',
-        { method: 'GET' }).then(
-            function (response) {
-                if (response.status !== 200) {
-                    console.log('Looks like there was a problem. Status Code: ' + response.status);
-                    return;
-                }
-                response.text().then(txt => {
-                    let json_obj = JSON.parse(txt);
-                    if (json_obj) {
-                        createAndAppendPosts(json_obj);
-                    } else {
-                        $("#no-post-alert").removeClass("d-none");
-                    }
-                })
-            }).catch(function (err) {
-                console.log('Fetch Error :-S', err);
-            });
-}
-
 
 const newPetition = () => {
     fetch('http://localhost:1337/petition/new', {
