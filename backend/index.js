@@ -155,10 +155,10 @@ app.post('/petition/new', authenticateToken, (req, res) => {
   let title = req.body.title;
   let content = req.body.content;
   let category = req.body.category;
-  let dueDate = {"__type":"Date","iso":req.body.dueDate};
+  let dueDate = { "__type": "Date", "iso": req.body.dueDate };
   console.log(dueDate);
-  if(category.length < 1){
-    res.status(400).send({"message":"Category must be declared"});
+  if (category.length < 1) {
+    res.status(400).send({ "message": "Category must be declared" });
     return;
   }
   if (title === undefined || content == undefined) {
@@ -191,6 +191,10 @@ const signPetition = async (petitionId, signer) => {
         if (value === signer)
           flag = 1;
       }
+      let now = new Date();
+      if (petition.get("dueDate") < now){
+        flag = 2;
+      }
       if (!flag) {
         petition.addUnique("signedUsersArray", signer);
         petition.increment("signatureNum");
@@ -199,8 +203,10 @@ const signPetition = async (petitionId, signer) => {
     }, (error) => {
       console.log("Error occured when retrieving petition: " + error);
     });
-  if (flag)
+  if (flag == 1)
     return Promise.reject({ code: 125, message: "User has already signed this petition!" }); // 125 is the code number?
+  if (flag == 2)
+    return Promise.reject({ code: 126, message: "Deadline for this petition is reached!" });
   return 1;
 }
 
@@ -212,8 +218,12 @@ app.post('/petition/sign', authenticateToken, (req, res) => {
     res.status(201).send({ "OK": "ok" });
   }, reason => {
     if (reason.code == 125) {
+      res.status(401);
+      console.log("This user has signed this petition before!");
+    }
+    if (reason.code == 126) {
       res.status(403);
-      console.log("This has signed this petition before!");
+      console.log("Deadline for this petition is reached!");
     }
     res.send({ "message": reason.message });
   })
@@ -389,7 +399,6 @@ app.get('/petition/retrieve/closed', authenticateToken, (req, res) => {
         }
       }
     }
-    console.log("closed: " + closed);
     res.json({
       "petition": closed
     });
@@ -405,7 +414,6 @@ app.get('/petition/retrieve/open', authenticateToken, (req, res) => {
   getPetitions().then(value => {
     let open = [];
     let now = new Date();
-    //console.log(now);
     for (let i = 0; i < value.length; i++) {
       if (value[i].dueDate === undefined || now < value[i].dueDate) {
         open.push(value[i]);
@@ -413,7 +421,6 @@ app.get('/petition/retrieve/open', authenticateToken, (req, res) => {
           break;
       }
     }
-    console.log("open: " + open);
     res.json({
       "petition": open
     });
