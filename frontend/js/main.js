@@ -97,6 +97,14 @@ $(document).ready(function () {
         console.log('Fetch Error :-S', err);
     });
 
+    var category;
+
+    $(".dropdown-menu-bar a").on('click', function (e) {
+        $('.status').text(this.innerHTML);
+        console.log('in', this.innerHTML);
+        category = $(this).text();
+    });
+
     $('#post-form').on('submit', function (e) {
         e.preventDefault();
 
@@ -111,7 +119,7 @@ $(document).ready(function () {
             body: JSON.stringify({
                 title: $("#petitionTitle").val(),  // TODO
                 content: $("#petitionText").val(), //TODO
-                category: $("#petitionCategory").val(),
+                category: category,
                 dueDate: date,
             }),
         })
