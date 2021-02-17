@@ -69,7 +69,12 @@ const userSignUp = async (email, password, studentID) => {
 }
 
 app.post('/signup', (req, res) => {
-  var promiseOutput = userSignUp(req.body.email, req.body.password, req.body.studentID);
+  //student id validation
+  let studentID = req.body.studentID;
+  //if (studentID)
+  let email = req.body.email;
+  let password = req.body.password;
+  var promiseOutput = userSignUp(email, password, studentID);
   promiseOutput.then(value => {
     res.status(201).send({ "message": value });
   }, reason => {
@@ -165,7 +170,6 @@ app.post('/petition/new', authenticateToken, (req, res) => {
     return;
   }
   newPetition(title, content, user, category, dueDate).then(value => {
-    //console.log(value);
     res.status(201).send({ "objectId": value });
   }, reason => {
     res.status(400).send({ "message": reason.message });
@@ -377,7 +381,7 @@ app.get('/petition/retrieve/closed', authenticateToken, (req, res) => {
     let now = new Date();
     console.log(now);
     for (let i = 0; i < value.length; i++) {
-      if (value.dueDate !== undefined) {
+      if (value[i].dueDate !== undefined) {
         if (now > value[i].dueDate) {
           closed.push(value[i]);
           if (closed.length == 10)
@@ -385,6 +389,7 @@ app.get('/petition/retrieve/closed', authenticateToken, (req, res) => {
         }
       }
     }
+    console.log("closed: " + closed);
     res.json({
       "petition": closed
     });
@@ -400,7 +405,7 @@ app.get('/petition/retrieve/open', authenticateToken, (req, res) => {
   getPetitions().then(value => {
     let open = [];
     let now = new Date();
-    console.log(now);
+    //console.log(now);
     for (let i = 0; i < value.length; i++) {
       if (value[i].dueDate === undefined || now < value[i].dueDate) {
         open.push(value[i]);
@@ -408,6 +413,7 @@ app.get('/petition/retrieve/open', authenticateToken, (req, res) => {
           break;
       }
     }
+    console.log("open: " + open);
     res.json({
       "petition": open
     });
