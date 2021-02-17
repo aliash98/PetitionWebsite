@@ -83,7 +83,7 @@ function createPetitionElements(petitions) {
         // });
 
         // $post.find(".edit-post-container").attr("data-pid", array_json[i].id);
-        postsElements.push($post)
+        petitionElements.push($post)
     }
     return petitionElements;
 }
