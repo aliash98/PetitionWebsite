@@ -59,10 +59,18 @@ body {
     height: 100%;
 }
 
-.profile-txt {
-    color: var(--cerulean-blue);
+.welcome-div {
+    flex-direction: row;
+    height: 100%;
+    width: 200px;
+    align-items: center;
+    justify-content: space-between;
     position: absolute;
     left: 3vw;
+}
+
+.profile-txt {
+    color: var(--cerulean-blue);
 }
 
 /* Create Petition Fixed Button */

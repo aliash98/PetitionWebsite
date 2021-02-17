@@ -34,7 +34,7 @@ $(document).ready(function () {
 
     $('#user-studentId-placeholder').html(user.studentId);
 
-    fetch('http://localhost:1337/petition/retrieve', {
+    fetch('http://localhost:1337/petition/retrieve/top', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + user.token,
@@ -47,25 +47,55 @@ $(document).ready(function () {
         response.text().then(txt => {
             let json_obj = JSON.parse(txt);
             if (json_obj) {
-                createAndAppendPetitions(json_obj);
+                createAndAppendSelectedPetitions(json_obj);
             }
-            // else {
-            //     $("#no-post-alert").removeClass("d-none");
-            // }
         })
     }
     ).catch(function (err) {
         console.log('Fetch Error :-S', err);
     });
 
-    // $("#create-petition-btn").on('click', function (e) {
-    //     $("#post-form").attr({
-    //         method: "POST",
-    //         action: "", //createPostUrl,
-    //     });
-    //     setModalAttributes("ایجاد پست جدید", "", "")
-    // });
+    fetch('http://localhost:1337/petition/retrieve/open', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + user.token,
+        },
+    }).then(function (response) {
+        if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' + response.status);
+            return;
+        }
+        response.text().then(txt => {
+            let json_obj = JSON.parse(txt);
+            if (json_obj) {
+                createAndAppendOpenPetitions(json_obj);
+            }
+        })
+    }
+    ).catch(function (err) {
+        console.log('Fetch Error :-S', err);
+    });
 
+    fetch('http://localhost:1337/petition/retrieve/closed', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + user.token,
+        },
+    }).then(function (response) {
+        if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' + response.status);
+            return;
+        }
+        response.text().then(txt => {
+            let json_obj = JSON.parse(txt);
+            if (json_obj) {
+                createAndAppendClosedPetitions(json_obj);
+            }
+        })
+    }
+    ).catch(function (err) {
+        console.log('Fetch Error :-S', err);
+    });
 
     $('#post-form').on('submit', function (e) {
         e.preventDefault();
@@ -97,53 +127,107 @@ $(document).ready(function () {
             });
     });
 
-    $(".petition-card").on('click', function (e) {
+    $(".selected-p").on('click', function (e) {
 
-        // $postContainer = $(this).closest(".post-container");
-        // title = $postContainer.find(".post-title").text();
-        // content = $postContainer.find(".post-content").text();
-
-        $clickedCard = $(this).closest(".petition-card");
+        $clickedCard = $(this).closest(".selected-p");
         id = $clickedCard.find("#selected-card-id").text();
         console.log($clickedCard.find("#selected-card-title").text());
         sessionStorage.setItem("cardId", id);
         window.sessionStorage.setItem("cardId", id);
         transitionToPage('sign.html');
     });
+
+    $(".open-p").on('click', function (e) {
+
+        $clickedCard = $(this).closest(".open-p");
+        id = $clickedCard.find("#open-card-id").text();
+        console.log($clickedCard.find("#open-card-title").text());
+        sessionStorage.setItem("cardId", id);
+        window.sessionStorage.setItem("cardId", id);
+        transitionToPage('sign.html');
+    });
+
+    $(".closed-p").on('click', function (e) {
+
+        $clickedCard = $(this).closest(".closed-p");
+        id = $clickedCard.find("#closed-card-id").text();
+        console.log($clickedCard.find("#closed-card-title").text());
+        sessionStorage.setItem("cardId", id);
+        window.sessionStorage.setItem("cardId", id);
+        transitionToPage('sign.html');
+    });
 })
 
-function createAndAppendPetitions(petitions) {
-    $petitions = createPetitionElements(petitions);
+function createAndAppendSelectedPetitions(petitions) {
+    $petitions = createSelectedPetitionElements(petitions);
     $("#selected-petitions-cards").append($petitions);
 }
 
-function createPetitionElements(petitions) {
+function createAndAppendOpenPetitions(petitions) {
+    $petitions = createOpenPetitionElements(petitions);
+    $("#open-petitions-cards").append($petitions);
+}
+
+function createAndAppendClosedPetitions(petitions) {
+    $petitions = createClosedPetitionElements(petitions);
+    $("#closed-petitions-cards").append($petitions);
+}
+
+function createSelectedPetitionElements(petitions) {
     petitionElements = [];
 
-    array_json = petitions["post"];
+    array_json = petitions["petition"];
 
     var i;
-
-    // if (!Array.isArray(array_json)) {
-    //     array_json = [];
-    //     array_json.push(posts["post"]);
-    // }
 
     for (i = 0; i < array_json.length; i++) {
         $petition = $(".cloneable-selected-petitions").clone(true);
         $petition.removeClass('d-none cloneable-selected-petitions');
-
         $petition.find("#selected-card-title").text(array_json[i].title);
         $petition.find("#selected-card-content").text(array_json[i].content);
         $petition.find("#selected-card-id").text(array_json[i].id);
-        // $post.find(".post-author").text(array_json[i].created_by.id);
         $petition.find("#selected-card-created-at").text(formatDate(array_json[i].createdAt));
 
-        // $post.find(".remove-post-container").attr("data-pid", array_json[i].id).on('click', function (e) {
-        //     deletePostRequest($(this).data("pid"), $(this).closest(".post-container"));
-        // });
+        petitionElements.push($petition)
+    }
+    return petitionElements;
+}
 
-        // $post.find(".edit-post-container").attr("data-pid", array_json[i].id);
+function createOpenPetitionElements(petitions) {
+    petitionElements = [];
+
+    array_json = petitions["petition"];
+
+    var i;
+
+    for (i = 0; i < array_json.length; i++) {
+        $petition = $(".cloneable-open-petitions").clone(true);
+        $petition.removeClass('d-none cloneable-open-petitions');
+        $petition.find("#open-card-title").text(array_json[i].title);
+        $petition.find("#open-card-content").text(array_json[i].content);
+        $petition.find("#open-card-id").text(array_json[i].id);
+        $petition.find("#open-card-created-at").text(formatDate(array_json[i].createdAt));
+
+        petitionElements.push($petition)
+    }
+    return petitionElements;
+}
+
+function createClosedPetitionElements(petitions) {
+    petitionElements = [];
+
+    array_json = petitions["petition"];
+
+    var i;
+
+    for (i = 0; i < array_json.length; i++) {
+        $petition = $(".cloneable-closed-petitions").clone(true);
+        $petition.removeClass('d-none cloneable-closed-petitions');
+        $petition.find("#closed-card-title").text(array_json[i].title);
+        $petition.find("#closed-card-content").text(array_json[i].content);
+        $petition.find("#closed-card-id").text(array_json[i].id);
+        $petition.find("#closed-card-created-at").text(formatDate(array_json[i].createdAt));
+
         petitionElements.push($petition)
     }
     return petitionElements;
@@ -162,6 +246,3 @@ function formatDate(date) {
 
     return [year, month, day].join('-');
 }
-
-// new petition -> new post
-// sign petition -> 
