@@ -67,7 +67,7 @@ $(document).ready(function () {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token,
+                'Authorization': 'Bearer ' + user.token,
             },
             body: JSON.stringify({
                 title: $("#petitionTitle").val(),  // TODO
