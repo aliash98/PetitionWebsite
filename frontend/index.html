@@ -104,7 +104,8 @@
             </span>
         </div>
         <div class="d-flex align-items-center" style="margin-top: 50px; justify-content: start;">
-            <button type="button" class="btn btn-primary create-petition-btn-fixed" data-toggle="modal" data-target="#formModal">
+            <button type="button" class="btn btn-primary create-petition-btn-fixed" data-toggle="modal"
+                data-target="#formModal">
                 ایجاد دادخواست
             </button>
             <!-- <button type="button"
@@ -124,26 +125,19 @@
                 </button>
             </div>
             <div id="selected-petitions-cards" class="d-flex petitions-container">
-                <div class="petition-card">
-                    <span class="card-title">
-                        عنوان دادخواست
+                <div class="petition-card cloneable-selected-petitions d-none">
+                    <span id="selected-card-title" class="card-title">
                     </span>
-                    <span class="card-txt">
-                        با سلام و احترام
-                        پیش‌نویس قانون منع حیوان‌آزاری که تدوین آن از اواخر سال ۹۴ آغاز شد ابتدا در قالب لایحه از سازمان
-                        حفاظت محیط زیست به هیئت دولت راه یافت. لایحه‌ای که تعلل دولت در ارسال آن به مجلس شورای اسلامی
-                        سبب شد این پیش‌نویس سال گذشته با پیگیری‌های فراکسیون محیط زیست مجلس، در قالب طرح به مجلس ارائه
-                        شود. اما این طرح که شهریور سال گذشته در مجلس شورای اسلامی اعلام وصول شد تا به امروز در کمیسیون
-                        حقوقی مجلس معطل مانده است.
+                    <span id="selected-card-content" class="card-txt">
                     </span>
                     <div class="card-date">
-                        <span class="card-date-txt">
+                        <span id="selected-card-created-at" class="card-date-txt">
                             ۱۳۹۹/۱۲
                         </span>
                         <span class="card-date-txt">
                             تا
                         </span>
-                        <span class="card-date-txt">
+                        <span id="selected-card-due-date" class="card-date-txt">
                             ۱۳۹۹/۲/۱۳
                         </span>
                     </div>
@@ -296,6 +290,7 @@
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
     <script src="js/persian-digit.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

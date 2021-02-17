@@ -173,88 +173,10 @@ registerDone = () => {
     showLoginAlert('ثبت نام با موفقیت انجام شد.', 'success');
 }
 
-const logout = () => {
+logout = () => {
     token = ''
     window.localStorage.removeItem('user')
     // showLoggedOutButtons()
 }
 
-
-function createAndAppendPosts(posts) {
-    // $posts = createPostElements(posts);
-    // $("#posts-container").append($posts);
-    postsElements = [];
-
-    array_json = posts["post"];
-    var i;
-    // if (!Array.isArray(array_json)){
-    //     array_json = [];
-    //     array_json.push(posts["post"]);
-    // }
-    for (i = 0; i < array_json.length; i++) {
-        // $post = $(".clonable-post").clone(true);
-        // $post.removeClass('d-none clonable-post');
-
-        // $post.find(".post-title").text(array_json[i].title);
-        // $post.find(".post-content").text(array_json[i].content);
-        // $post.find(".post-author").text(array_json[i].created_by.id);
-        // $post.find(".post-created-at").text(formatDate(array_json[i].created_at));
-        //postsElements.push($post)
-
-        // TODO: assign attributes to html   
-    }
-    // return postsElements;
-
-}
-
-const getPetition = () => {
-    fetch('http://localhost:1337/petition/retrieve',
-        { method: 'GET' }).then(
-            function (response) {
-                if (response.status !== 200) {
-                    console.log('Looks like there was a problem. Status Code: ' + response.status);
-                    return;
-                }
-                response.text().then(txt => {
-                    let json_obj = JSON.parse(txt);
-                    if (json_obj) {
-                        createAndAppendPosts(json_obj);
-                    } else {
-                        $("#no-post-alert").removeClass("d-none");
-                    }
-                })
-            }).catch(function (err) {
-                console.log('Fetch Error :-S', err);
-            });
-}
-
-
-const newPetition = () => {
-    fetch('http://localhost:1337/petition/new', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
-        },
-        body: JSON.stringify({
-            title: "My",  // TODO
-            content: "an", //TODO
-        }),
-    })
-        .then(
-            function (response) {
-                if (response.status !== 201) {
-                    console.log('Looks like there was a problem. Status Code: ' + response.status);
-                    return;
-                }
-                //window.location.reload();    
-            }
-        )
-        .catch(function (err) {
-            console.log('Fetch Error :-S', err);
-        });
-}
-
-// new petition -> new post
-// sign petition -> 
-//
+// TODO
