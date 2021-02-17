@@ -63,8 +63,8 @@ $(document).ready(function () {
     });
 })
 
-function createAndAppendClosedPetitions(allPetitions) {
-    $allPetitions = createClosedPetitionElements(allPetitions);
+function createAndAppendAllPetitions(allPetitions) {
+    $allPetitions = createAllPetitionElements(allPetitions);
     $("#all-petitions-cards").append($allPetitions);
 }
 

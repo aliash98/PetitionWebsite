@@ -211,6 +211,7 @@ body {
 }
 
 .card-title {
+    white-space: pre-line;
     display: block;
     width: 398px;
     height: 33.5px;
