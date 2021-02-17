@@ -165,8 +165,8 @@ register = () => {
         .then(
             function (response) {
                 if (response.status !== 201) {
-                    console.log('Looks like there was a problem. Status Code: ' + response.status);
-                    showLoginAlert('ایمیل یا شماره دانشجویی شما قبلا ثبت شده است!')
+                    console.log('Looks like there was a problem. Status Code: ' + response.status + response.message);
+                    showLoginAlert('ایمیل یا شماره دانشجویی شما قبلا ثبت شده است!');
                     $('#dismiss-alert').click();
                     return;
                 }
