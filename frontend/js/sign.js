@@ -55,7 +55,8 @@ $(document).ready(function () {
 
 function showPetitionCard(petition) {
 
-    array_json = petition["post"];
+    array_json = petition["petition"];
+    console.log(array_json);
 
     // if (!Array.isArray(array_json)) {
     //     array_json = [];
