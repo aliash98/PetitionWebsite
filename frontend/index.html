@@ -53,16 +53,19 @@
                 </a>
             </div> -->
             <div class="tabs-div" style="border: 0px solid transparent;">
-                <span role="button" class="tabs-btn" style="border-bottom: 3px solid var(--rich-black);" onclick="transitionToPage('index.html')">
+                <span role="button" class="tabs-btn" style="border-bottom: 3px solid var(--rich-black);"
+                    onclick="transitionToPage('index.html')">
                     خانه
                 </span>
                 <span role="button" class="tabs-btn" onclick="transitionToPage('petitions.html')">
                     دادخواست‌ها
                 </span>
             </div>
-            <span class="profile-txt">
-                محسن لرنی، خوش آمدید.
-            </span>
+            <div class="d-flex welcome-div">
+                <!-- TODO -->
+                <span id="user-studentId-placeholder" class="profile-txt">
+                </span>
+            </div>
         </div>
 
         <script>
@@ -101,9 +104,14 @@
             </span>
         </div>
         <div class="d-flex align-items-center" style="margin-top: 50px; justify-content: start;">
-            <button class="btn btn-primary create-petition-btn-fixed">
+            <button type="button" class="btn btn-primary create-petition-btn-fixed" data-toggle="modal" data-target="#formModal">
                 ایجاد دادخواست
             </button>
+            <!-- <button type="button"
+                class="d-flex btn create-petition-btn-float my-2 p-2 justify-content-center align-items-center"
+                id="create-petition-btn" data-toggle="modal" data-target="#formModal">
+                <i class="gg-math-plus"></i>
+            </button> -->
         </div>
         <div id="selected-petitions" class="d-flex petitions">
             <div id="selected-petitions-title" class="d-flex align-items-center petitions-title">

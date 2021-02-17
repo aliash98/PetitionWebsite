@@ -59,6 +59,11 @@ body {
     height: 100%;
 }
 
+.welcome-div {
+    background-color: red;
+    flex-direction: row;
+}
+
 .profile-txt {
     color: var(--cerulean-blue);
     position: absolute;

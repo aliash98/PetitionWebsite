@@ -91,6 +91,8 @@ body {
 
 .tab-footer {
     height: 15%;
+    position: relative;
+    top: 35px;
 }
 
 .logo-container img {
