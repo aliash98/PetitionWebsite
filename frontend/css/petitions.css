@@ -190,16 +190,12 @@ body {
     border-radius: 1px;
 }
 
-.all-petitions-cards {
-    height: 225.5px;
-}
-
 /* Petition Card */
 
 .petition-card {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 225.5px;
     max-width: 400px;
     min-width: 400px;
     background-color: var(--platinum);

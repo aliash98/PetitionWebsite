@@ -76,6 +76,9 @@ login = () => {
     }).then(
         function (response) {
             if (response.status !== 200) {
+                if (response.status == 403) {
+                    showLoginAlert('مشخصات شما در سیستم ثبت نشده است!');
+                }
                 console.log('Looks like there was a problem. Status Code: ' + response.status);
                 return;
             }
@@ -178,12 +181,6 @@ register = () => {
 registerDone = () => {
     $('#login-tab-btn').click()
     showLoginAlert('ثبت نام با موفقیت انجام شد.', 'success');
-}
-
-logout = () => {
-    token = ''
-    window.localStorage.removeItem('user')
-    // showLoggedOutButtons()
 }
 
 // TODO

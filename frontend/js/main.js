@@ -27,11 +27,6 @@ const user = getLocalStorageWithExpiry('user');
 
 $(document).ready(function () {
 
-    // if (user === undefined) {
-    //     window.location.href = '/'
-    //     return;
-    // }
-
     $('#user-studentId-placeholder').html(user.studentId);
 
     fetch('http://localhost:1337/petition/retrieve/top', {
