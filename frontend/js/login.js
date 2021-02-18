@@ -37,7 +37,7 @@ showLoginAlert = (message, style = 'danger') => {
 }
 
 login = () => {
-    const emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    const studentIdReg = /^\d{8}$/;
     let studentId = $('#login-studentId-input').val();
     let password = $('#login-password-input').val();
 
@@ -51,10 +51,10 @@ login = () => {
         return;
     }
 
-    // if (!emailReg.test(studentId)) {
-    //     showLoginAlert('لطفا یک شماره دانشجویی متعبر وارد کنید!')
-    //     return;
-    // }
+    if (!studentIdReg.test(studentId)) {
+        showLoginAlert('لطفا یک شماره دانشجویی متعبر وارد کنید!')
+        return;
+    }
 
     if (password == '') {
         showLoginAlert('لطفا رمز عبور خود را وارد کنید!')
@@ -97,6 +97,8 @@ login = () => {
 
 register = () => {
     const emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    const studentIdReg = /^\d{8}$/;
+
     let email = $('#register-email-input').val();
     let studentId = $('#register-studentId-input').val();
     let password = $('#register-password-input').val();
@@ -115,6 +117,11 @@ register = () => {
 
     if (studentId == '') {
         showLoginAlert('لطفا شماره دانشجویی خود را وارد کنید!')
+        return;
+    }
+
+    if (!studentIdReg.test(studentId)) {
+        showLoginAlert('لطفا یک شماره دانشجویی متعبر وارد کنید!')
         return;
     }
 
