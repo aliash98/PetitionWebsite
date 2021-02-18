@@ -74,8 +74,11 @@ app.post('/signup', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
   const myregex = /^\d{8}$/;
-  if (!myregex.test(studentID))
+  if (!myregex.test(studentID)){
     res.status(400).send({ "message": "StudentId is not a number!" });
+    console.log("StudentId is not a number!");
+    return;
+  }
   var promiseOutput = userSignUp(email, password, studentID);
   promiseOutput.then(value => {
     res.status(201).send({ "message": value });
