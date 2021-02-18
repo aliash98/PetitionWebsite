@@ -47,8 +47,6 @@ app.use('/dashboard', dashboard);
 // --------- SignUp ------------ 
 
 const userSignUp = async (email, password, studentID) => {
-  // TODO: other validation, studentID, email and etc
-  // TODO: get user's name 
   if (password.length < 5) {
     return Promise.reject({ code: 125, message: "Length of password is less than 5 chars!" });
   }
@@ -69,7 +67,6 @@ const userSignUp = async (email, password, studentID) => {
 }
 
 app.post('/signup', (req, res) => {
-  //student id validation
   let studentID = req.body.studentID;
   let email = req.body.email;
   let password = req.body.password;
@@ -96,8 +93,6 @@ app.post('/signup', (req, res) => {
 // --------- SignIn ------------ 
 
 const userSignIn = async (studentID, password) => {
-  // TODO: Validate stdID to be in 8 digit number
-  // TODO: Validate password to be a string + its length
   // TODO: Validate the request length
   Parse.User.enableUnsafeCurrentUser()
   try {
@@ -112,26 +107,22 @@ const userSignIn = async (studentID, password) => {
 app.post('/signin', (req, res) => {
   let studentID = req.body.studentID;
   const myregex = /^\d{8}$/;
-  const emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
   if (!myregex.test(studentID)) {
     res.status(400).send({"message": "StudentId is not a number!"});
     console.log("StudentId is not a number!");
     return;
   }
-  if (!emailReg.test(email)){
-    res.status(400).send({ "message": "Email is not valid!" });
-    console.log("Email is not valid!");
-    return;
-  }
   var promiseOutput = userSignIn(studentID, req.body.password);
   promiseOutput.then(value => {
-    //const username = req.body.email;
-    //const user = { name : value };
     const accessToken = jwt.sign({ name: value }, process.env.ACCESS_TOKEN_SECRET);
     console.log("Access token generated for new user: " + accessToken);
     res.json({ accessToken: accessToken });
   }, reason => {
-    console.log("User can't sign in, reason: " + reason);
+    console.log("User can't sign in, reason: " + reason.message);
+    if (reason.code == 101){
+      res.status(403).send({"message" : "Username or password invalid"});
+      return;
+    }
     let header_status = 400;
     if (reason.code !== undefined)
       header_status = reason.code;
