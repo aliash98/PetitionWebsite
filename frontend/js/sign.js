@@ -119,7 +119,7 @@ function showPetitionCard(petition) {
 
 showNotifAlert = (message, style = 'danger') => {
     $('#alert-zone').html(`
-        <div id="login-alert" class="alert alert-${style} alert-dismissible fade show mx-auto" style="display:none;" role="alert">
+        <div id="login-alert" class="alert alert-${style} alert-dismissible fade show mx-auto" style="display:block;" role="alert">
             <button id="dismiss-alert" type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -127,7 +127,7 @@ showNotifAlert = (message, style = 'danger') => {
         </div>
     `);
 
-    $('#login-alert').slideDown("fast");
+    //$('#login-alert').slideDown("fast");
 }
 
 function formatDate(date) {

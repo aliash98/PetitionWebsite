@@ -71,9 +71,11 @@ const userSignUp = async (email, password, studentID) => {
 app.post('/signup', (req, res) => {
   //student id validation
   let studentID = req.body.studentID;
-  //if (studentID)
   let email = req.body.email;
   let password = req.body.password;
+  const myregex = /^\d{8}$/;
+  if (!myregex.test(studentID))
+    res.status(400).send({ "message": "StudentId is not a number!" });
   var promiseOutput = userSignUp(email, password, studentID);
   promiseOutput.then(value => {
     res.status(201).send({ "message": value });
@@ -99,7 +101,14 @@ const userSignIn = async (studentID, password) => {
 }
 
 app.post('/signin', (req, res) => {
-  var promiseOutput = userSignIn(req.body.studentID, req.body.password);
+  let studentID = req.body.studentID;
+  const myregex = /^\d{8}$/;
+  if (!myregex.test(studentID)) {
+    res.status(400).send({"message": "StudentId is not a number!"});
+    console.log("StudentId is not a number!");
+    return;
+  }
+  var promiseOutput = userSignIn(studentID, req.body.password);
   promiseOutput.then(value => {
     //const username = req.body.email;
     //const user = { name : value };
@@ -192,7 +201,7 @@ const signPetition = async (petitionId, signer) => {
           flag = 1;
       }
       let now = new Date();
-      if (petition.get("dueDate") < now){
+      if (petition.get("dueDate") < now) {
         flag = 2;
       }
       if (!flag) {
