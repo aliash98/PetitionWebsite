@@ -74,9 +74,15 @@ app.post('/signup', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
   const myregex = /^\d{8}$/;
+  const emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
   if (!myregex.test(studentID)){
     res.status(400).send({ "message": "StudentId is not a number!" });
     console.log("StudentId is not a number!");
+    return;
+  }
+  if (!emailReg.test(email)){
+    res.status(400).send({ "message": "Email is not valid!" });
+    console.log("Email is not valid!");
     return;
   }
   var promiseOutput = userSignUp(email, password, studentID);
@@ -106,9 +112,15 @@ const userSignIn = async (studentID, password) => {
 app.post('/signin', (req, res) => {
   let studentID = req.body.studentID;
   const myregex = /^\d{8}$/;
+  const emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
   if (!myregex.test(studentID)) {
     res.status(400).send({"message": "StudentId is not a number!"});
     console.log("StudentId is not a number!");
+    return;
+  }
+  if (!emailReg.test(email)){
+    res.status(400).send({ "message": "Email is not valid!" });
+    console.log("Email is not valid!");
     return;
   }
   var promiseOutput = userSignIn(studentID, req.body.password);
