@@ -250,3 +250,8 @@ function formatDate(date) {
 
     return [year, month, day].join('/');
 }
+
+logout = () => {
+    window.localStorage.removeItem('user')
+    window.location.href = 'login.html'
+}
